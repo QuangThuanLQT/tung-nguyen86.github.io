@@ -35,6 +35,18 @@
 			"email": "abc6@gmail.com",
 			"address": "Vĩnh Phúc",
 			"phone": "0904173567"
+		},
+		{
+			"name": "Nguyễn Văn A7",
+			"email": "abc7@gmail.com",
+			"address": "Thái Nguyên",
+			"phone": "0913778948"
+		},
+		{
+			"name": "Nguyễn Văn A8",
+			"email": "abc8@gmail.com",
+			"address": "Trà Vinh",
+			"phone": "0904173565"
 		}
 	]
 }
