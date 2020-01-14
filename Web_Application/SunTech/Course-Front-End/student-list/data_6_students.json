@@ -1,0 +1,40 @@
+{
+	"students": [
+		{
+			"name": "Nguyễn Văn A1",
+			"email": "abc1@gmail.com",
+			"address": "Hà Nam",
+			"phone": "0912102477"
+		},
+		{
+			"name": "Nguyễn Văn A2",
+			"email": "abc2@gmail.com",
+			"address": "Hà Nội",
+			"phone": "0913778943"
+		},
+		{
+			"name": "Nguyễn Văn A3",
+			"email": "abc3@gmail.com",
+			"address": "Ninh Bình",
+			"phone": "0904173567"
+		},
+		{
+			"name": "Nguyễn Văn A4",
+			"email": "abc4@gmail.com",
+			"address": "Phú Thọ",
+			"phone": "0912102477"
+		},
+		{
+			"name": "Nguyễn Văn A5",
+			"email": "abc5@gmail.com",
+			"address": "Thái Bình",
+			"phone": "0913778943"
+		},
+		{
+			"name": "Nguyễn Văn A6",
+			"email": "abc6@gmail.com",
+			"address": "Vĩnh Phúc",
+			"phone": "0904173567"
+		}
+	]
+}

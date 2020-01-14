@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Homework | Multiplication Table</title>
+	<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+	<header></header>
+	<main>
+		<div class="container">
+			<form class="form-style">
+				<ul>
+					<li>
+						<input type="text" id="txtStartNumber" name="txtStartNumber" class="field-style" placeholder="Start Number *" onkeypress="processOnKeyPress(event)" onkeyup="processOnKeyUp(event)" />
+					</li>
+					<li>
+						<input type="text" id="txtEndNumber" name="txtEndNumber" class="field-style" placeholder="End Number *" onkeypress="processOnKeyPress(event)" onkeyup="processOnKeyUp(event)" />
+					</li>
+					<li id="errorInfo"></li>
+					<li>
+						<input type="button" id="btnDisplayTable" value="Display Multiplication Table" onclick="displayMultiplicationTable()" />
+					</li>
+				</ul>
+			</form>
+
+			<div id="divMultiplicationTable" class="hidden-table"></div>
+		</div>
+	</main>
+	<footer></footer>
+
+	<script src="./js/scripts.js"></script>
+</body>
+</html>

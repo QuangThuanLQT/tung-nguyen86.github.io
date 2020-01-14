@@ -1,0 +1,125 @@
+* {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-size: 15px;
+	font-family: verdana, sans-serif;
+}
+
+.container {
+	width: 1200px;
+	margin: auto;
+}
+
+.form-style {
+	max-width: 350px;
+	background: #FAFAFA;
+	padding: 30px 10px;
+	margin: 30px auto;
+	box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+	border-radius: 10px;
+	border: 2px solid #305A72;
+}
+
+.form-style ul {
+	list-style: none;
+	margin-bottom: -15px;
+}
+
+.form-style ul li {
+	display: block;
+	margin-bottom: 15px;
+	min-height: 35px;
+	text-align: center;
+}
+
+.form-style ul li .field-style {
+	width: 70%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box; 
+	padding: 8px;
+	outline: none;
+	border: 1px solid #B0CFE0;
+	-webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+	-o-transition: all 0.30s ease-in-out;
+}
+
+.form-style ul li .field-style:focus {
+	box-shadow: 0 0 5px #B0CFE0;
+	border: 1px solid #B0CFE0;
+}
+
+.form-style ul li input[type="button"], 
+.form-style ul li input[type="submit"] {
+	width: 70%;
+	-moz-box-shadow: inset 0px 1px 0px 0px #3985B1;
+	-webkit-box-shadow: inset 0px 1px 0px 0px #3985B1;
+	box-shadow: inset 0px 1px 0px 0px #3985B1;
+	background-color: #216288;
+	border: 1px solid #17445E;
+	display: inline-block;
+	cursor: pointer;
+	color: #FFFFFF;
+	padding: 8px 18px;
+	text-decoration: none;
+	font: 12px Arial, Helvetica, sans-serif;
+}
+
+.form-style ul li input[type="button"]:hover, 
+.form-style ul li input[type="submit"]:hover {
+	background: linear-gradient(to bottom, #2D77A2 5%, #337DA8 100%);
+	background-color: #28739E;
+}
+
+.visible-table {
+	visibility: visible;
+	opacity: 1;
+	overflow: auto;
+	max-height: 100%;
+	transition: all 2.5s ease;
+}
+
+.hidden-table {
+	visibility: hidden;
+	opacity: 0;
+	overflow: hidden;
+	max-height: 0px;
+	transition: all 1s linear;
+}
+
+.visible-error-info {
+	color: #ff0000;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#errorInfo, .hidden-error-info {
+	min-height: 0px;
+}
+
+table {
+	margin: 50px auto;
+	background-color: #e8edff;
+	border-collapse: collapse;
+	border-top: 3px solid #9baff1;
+	border-bottom: 3px solid #9baff1;
+	box-shadow: 0px 1px 8px #966dd1;
+}
+
+td {
+	border-left: 1px solid #aabcfe;
+	border-right: 1px solid #aabcfe;
+	border-bottom: 1px solid #dddddd;
+	padding: 6px 10px;
+}
+
+td:hover {
+	background-color: #11edff;
+	cursor: pointer;
+}
