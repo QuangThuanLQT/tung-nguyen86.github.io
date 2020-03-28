@@ -117,26 +117,53 @@ function clearTextOfKeywordSearch() {
 }
 
 function switchNotificationAdd() {
-    if (chkNotificationAdd.checked === true) {
-        localStorage.setItem('isAddNotificationSent', '1');
-    } else {
-        localStorage.setItem('isAddNotificationSent', '0');
+    try {
+        handleExceptionOfLocalStorage();
+
+        if (chkNotificationAdd.checked === true) {
+            localStorage.setItem('isAddNotificationSent', '1');
+        } else {
+            localStorage.setItem('isAddNotificationSent', '0');
+        }
+    } catch(exception) {
+        sendAlertNotification(`
+            Chức năng này không khả dụng do Trình duyệt hiện tại không hỗ trợ lưu trữ dữ liệu (Local Storage).<br>
+            Bạn vui lòng sử dụng Trình duyệt khác như: Chrome, Opera hoặc FireFox.
+        `, 4500);
     }
 }
 
 function switchNotificationUpdate() {
-    if (chkNotificationUpdate.checked === true) {
-        localStorage.setItem('isUpdateNotificationSent', '1');
-    } else {
-        localStorage.setItem('isUpdateNotificationSent', '0');
+    try {
+        handleExceptionOfLocalStorage();
+
+        if (chkNotificationUpdate.checked === true) {
+            localStorage.setItem('isUpdateNotificationSent', '1');
+        } else {
+            localStorage.setItem('isUpdateNotificationSent', '0');
+        }
+    } catch(exception) {
+        sendAlertNotification(`
+            Chức năng này không khả dụng do Trình duyệt hiện tại không hỗ trợ lưu trữ dữ liệu (Local Storage).<br>
+            Bạn vui lòng sử dụng Trình duyệt khác như: Chrome, Opera hoặc FireFox.
+        `, 4500);
     }
 }
 
 function switchNotificationDelete() {
-    if (chkNotificationDelete.checked === true) {
-        localStorage.setItem('isDeleteNotificationSent', '1');
-    } else {
-        localStorage.setItem('isDeleteNotificationSent', '0');
+    try {
+        handleExceptionOfLocalStorage();
+
+        if (chkNotificationDelete.checked === true) {
+            localStorage.setItem('isDeleteNotificationSent', '1');
+        } else {
+            localStorage.setItem('isDeleteNotificationSent', '0');
+        }
+    } catch(exception) {
+        sendAlertNotification(`
+            Chức năng này không khả dụng do Trình duyệt hiện tại không hỗ trợ lưu trữ dữ liệu (Local Storage).<br>
+            Bạn vui lòng sử dụng Trình duyệt khác như: Chrome, Opera hoặc FireFox.
+        `, 4500);
     }
 }
 
@@ -147,6 +174,8 @@ function initializeAllNotificationSettings() {
 }
 
 function initializeNotificationAdd() {
+    handleExceptionOfLocalStorage();
+
     let isAddNotificationSent = localStorage.getItem('isAddNotificationSent');
 
     if (isAddNotificationSent) {
@@ -165,6 +194,8 @@ function initializeNotificationAdd() {
 }
 
 function initializeNotificationUpdate() {
+    handleExceptionOfLocalStorage();
+
     let isUpdateNotificationSent = localStorage.getItem('isUpdateNotificationSent');
 
     if (isUpdateNotificationSent) {
@@ -183,6 +214,8 @@ function initializeNotificationUpdate() {
 }
 
 function initializeNotificationDelete() {
+    handleExceptionOfLocalStorage();
+
     let isDeleteNotificationSent = localStorage.getItem('isDeleteNotificationSent');
 
     if (isDeleteNotificationSent) {

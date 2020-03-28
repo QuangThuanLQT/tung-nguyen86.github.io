@@ -11,7 +11,7 @@ function downloadDataFile() {
         sendAlertNotification(`
             Chức năng này hiện không khả dụng do chưa có dữ liệu sinh viên.<br>
             Bạn vui lòng nhập liệu trước khi Tải file.
-        `);
+        `, 4000);
 
         setTimeout(function() { txtFullName.focus(); }, 2000);
         return;
@@ -23,7 +23,7 @@ function downloadDataFile() {
         sendAlertNotification(`
             Chức năng này hiện không khả dụng do chưa tìm thấy dữ liệu sinh viên phù hợp.<br>
             Bạn vui lòng nhập và chọn lại các Điều kiện Tìm kiếm/Lọc trước khi Tải file.
-        `);
+        `, 4000);
 
         setTimeout(function() { txtKeywordSearch.focus(); }, 2000);
         return;

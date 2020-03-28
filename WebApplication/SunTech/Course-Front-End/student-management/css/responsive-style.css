@@ -163,6 +163,10 @@
         color: #0000ff;
     }
 
+    div.list-student table tr.error-info:hover {
+        color: #ff0000;
+    }
+
     div.list-student table tr:hover {
         background-color: #dddddd;
         color: #000000;
@@ -191,7 +195,8 @@
         width: 100%;
     }
 
-    div.list-student table tr.no-data-found td {
+    div.list-student table tr.no-data-found td, 
+    div.list-student table tr.error-info td {
         text-align: center;
     }
 
@@ -296,6 +301,11 @@
 
     div.form-student div#divResetStudentInfo {
         margin-left: calc(100% - 277px);
+    }
+
+    div.list-student table tr.error-info {
+        height: 90px;
+        font-size: 13px;
     }
 
     div.list-student table tr td {
@@ -465,6 +475,10 @@
         font-size: 13px;
     }
 
+    div.list-student table tr.error-info {
+        font-size: 12.5px;
+    }
+
     div.list-student table tr td.col-order {
         font-size: 14px;
     }
@@ -613,6 +627,11 @@
     }
 
     div.list-student table tr {
+        font-size: 12px;
+    }
+
+    div.list-student table tr.error-info {
+        height: 100px;
         font-size: 12px;
     }
 

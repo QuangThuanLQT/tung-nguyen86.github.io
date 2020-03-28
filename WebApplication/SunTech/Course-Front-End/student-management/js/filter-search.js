@@ -11,7 +11,7 @@ function filterSearch() {
         sendAlertNotification(`
             Chức năng này hiện không khả dụng do chưa có dữ liệu sinh viên.<br>
             Bạn vui lòng nhập liệu trước khi thực hiện Tìm kiếm và Lọc.
-        `);
+        `, 4000);
 
         setTimeout(function() { txtFullName.focus(); }, 2000);
         return;

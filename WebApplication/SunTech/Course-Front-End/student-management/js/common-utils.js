@@ -237,4 +237,25 @@ function findMaxNumber(number_1, number_2) {
         return number_2;
     }
 }
+
+function handleExceptionOfLocalStorage() {
+    if (typeof(localStorage) === 'undefined') {
+        throw "Local Storage is not supported by the current browser !!!";
+    }
+}
+
+function renderTableForErrorInfo() {
+    let tableContent = TABLE_HEADER;
+
+    tableContent += `
+        <tr class="error-info">
+            <td align="center" colspan="${TABLE_COLUMN_COUNT}">
+                Trình duyệt hiện tại không hỗ trợ lưu trữ dữ liệu (Local Storage).<br>
+                Bạn vui lòng sử dụng Trình duyệt khác như: Chrome, Opera hoặc FireFox.
+            </td>
+        </tr>
+    `;
+
+    tblStudentInfoList.innerHTML = tableContent;
+}
 /* ------ End Functions Declaration ------*/

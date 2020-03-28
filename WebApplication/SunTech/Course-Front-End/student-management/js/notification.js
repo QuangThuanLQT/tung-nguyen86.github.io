@@ -150,7 +150,7 @@ function sendDeleteNotification(studentFullName) {
     }, 3500);
 }
 
-function sendAlertNotification(alertMessage) {
+function sendAlertNotification(alertMessage, displayTime = 3500) {
     clearTimeout(timeoutAlertNotification);
     clearTimeout(timeoutRemoveAlertNotifications);
     clearTimeout(timeoutCollapseAlertNotification);
@@ -173,12 +173,12 @@ function sendAlertNotification(alertMessage) {
 
     timeoutCollapseAlertNotification = setTimeout(function() {
         divAlertNotification.classList.toggle('collapse-notification');
-    }, 4000);
+    }, displayTime);
 
     timeoutRemoveLastAlertNotification = setTimeout(function() {
         while (divAlertNotificationList.hasChildNodes()) {
             divAlertNotificationList.removeChild(divAlertNotificationList.firstChild);
         }
-    }, 5000);
+    }, (displayTime + 1000));
 }
 /* ------ End Functions Declaration ------*/

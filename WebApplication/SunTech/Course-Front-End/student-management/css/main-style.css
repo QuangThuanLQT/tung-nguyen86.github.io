@@ -215,6 +215,14 @@ div.list-student table tr.no-data-found {
     cursor: initial;
 }
 
+div.list-student table tr.error-info {
+    height: 50px;
+    background-color: #eeeeee;
+    color: #ff0000;
+    font-size: 13.5px;
+    cursor: initial;
+}
+
 div.list-student table tr:hover {
     background-color: #dddddd;
     color: #0000ff;
@@ -236,6 +244,11 @@ div.list-student table tr:last-child {
 
 div.list-student table tr.no-data-found:hover {
     background-color: #eeeeee;
+}
+
+div.list-student table tr.error-info:hover {
+    background-color: #eeeeee;
+    color: #ff0000;
 }
 
 div.list-student table tr:hover a {

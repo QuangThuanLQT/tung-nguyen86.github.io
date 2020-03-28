@@ -42,11 +42,15 @@ divResetStudentInfo.onclick = function() { resetStudentForm(); }
 
 function processOnLoadPage() {
     resetFilterSearchForm();
-    initializeAllNotificationSettings();
-    initializeGlobalStudentId();
-
     resetStudentForm();
-    displayStudentInfoList(true);
+
+    try {
+        initializeAllNotificationSettings();
+        initializeGlobalStudentId();
+        displayStudentInfoList(true);
+    } catch(exception) {
+        renderTableForErrorInfo();
+    }
 }
 
 function processOnKeyPress(event) {
@@ -58,6 +62,19 @@ function processOnKeyPress(event) {
 }
 
 function saveStudentInfo() {
+    try {
+        saveStudentInfoWithExceptionHandler();
+    } catch(exception) {
+        sendAlertNotification(`
+            Chức năng này không khả dụng do Trình duyệt hiện tại không hỗ trợ lưu trữ dữ liệu (Local Storage).<br>
+            Bạn vui lòng sử dụng Trình duyệt khác như: Chrome, Opera hoặc FireFox.
+        `, 5000);
+    }
+}
+
+function saveStudentInfoWithExceptionHandler() {
+    handleExceptionOfLocalStorage();
+
     let fullName        = txtFullName.value.trim();
     let emailAddress    = txtEmailAddress.value.trim();
     let phoneNumber     = txtPhoneNumber.value.trim();
@@ -150,6 +167,8 @@ function setEffectForStudentForm(isValidStudent) {
 }
 
 function addStudent(student) {
+    handleExceptionOfLocalStorage();
+
     if (student && errorDetails.length === 0) {
         if (window.confirm(`Bạn chắc chắn muốn thêm sinh viên ${student.fullName} vào Danh sách ?`)) {
             let newPhoneNumber = standardizePhoneNumber(student.phoneNumber);
@@ -175,6 +194,8 @@ function addStudent(student) {
 }
 
 function updateStudent(student) {
+    handleExceptionOfLocalStorage();
+
     if (student && errorDetails.length === 0 && currentStudentId !== MINUS_ONE_NUMBER) {
         if (window.confirm(`Bạn chắc chắn muốn cập nhật Thông tin sinh viên ${student.fullName} trong Danh sách ?`)) {
             let newPhoneNumber = standardizePhoneNumber(student.phoneNumber);
@@ -205,6 +226,8 @@ function updateStudent(student) {
 }
 
 function deleteStudent(studentId, sourceElementObject, sourceElementType) {
+    handleExceptionOfLocalStorage();
+
     let index = findIndexOfItemByIdInArray(students, studentId);
     let fullName = students[index].fullName;
 
@@ -261,6 +284,8 @@ function getStudentById(arrayOfStudents, studentId) {
 }
 
 function displayStudentInfoList(isFirstFunctionCallOnLoadPage = false) {
+    handleExceptionOfLocalStorage();
+
     let studentInfoList = localStorage.getItem('students');
 
     if (studentInfoList && studentInfoList != '[]') {
@@ -308,8 +333,8 @@ function displayStudentInfoListAfterSaving(savedStudentId, actionType) {
 }
 
 function renderStudentDataTable(arrayOfStudents, actionType = EMPTY_STRING) {
-    let prefixTableRow = '<tr>';
     let tableContent = TABLE_HEADER;
+    let prefixTableRow;
     let studentId;
 
     let functionCallFromTableColumn;
@@ -578,10 +603,13 @@ function resetEffectForStudentForm() {
 }
 
 function initializeGlobalStudentId() {
+    handleExceptionOfLocalStorage();
     localStorage.setItem('global_student_id', getGlobalStudentId());
 }
 
 function getGlobalStudentId() {
+    handleExceptionOfLocalStorage();
+
     let globalStudentId = localStorage.getItem('global_student_id');
     let studentInfoList = localStorage.getItem('students');
 
@@ -616,6 +644,7 @@ function getGlobalStudentId() {
 }
 
 function setGlobalStudentId(globalStudentId) {
+    handleExceptionOfLocalStorage();
     localStorage.setItem('global_student_id', globalStudentId);
 }
 /* ------ End Functions Declaration ------*/
