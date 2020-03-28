@@ -569,11 +569,12 @@
 
     div.popup-window div.main-area div.example {
         margin-left: 15px;
+        margin-bottom: 12px;
     }
 
     div.popup-window div.main-area div.example div.heading div.text, 
     div.popup-window div.main-area div.example div.content div.text {
-        line-height: 1.6;
+        line-height: 1.5;
     }
 
     div.popup-window div.main-area div.line div.content span.highlight {
@@ -705,12 +706,17 @@
 
     div.popup-window div.main-area div.example {
         margin-left: 12px;
-        margin-bottom: 13px;
+        margin-bottom: 10px;
+        font-size: 12px;
     }
 
     div.popup-window div.main-area div.example div.heading div.text, 
     div.popup-window div.main-area div.example div.content div.text {
-        line-height: 1.5;
+        line-height: 1.4;
+    }
+
+    div.popup-window div.main-area div.example div.heading i {
+        margin-top: 0px;
     }
 
     div.popup-window div.main-area div.example div.content {

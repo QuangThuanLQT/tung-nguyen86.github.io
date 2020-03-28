@@ -229,4 +229,12 @@ function getCurrentDateTime() {
 
     return strCurrentDateTime;
 }
+
+function findMaxNumber(number_1, number_2) {
+    if (number_1 >= number_2) {
+        return number_1;
+    } else {
+        return number_2;
+    }
+}
 /* ------ End Functions Declaration ------*/

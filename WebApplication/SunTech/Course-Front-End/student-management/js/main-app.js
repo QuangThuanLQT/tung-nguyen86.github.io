@@ -47,7 +47,6 @@ function processOnLoadPage() {
 
     resetStudentForm();
     displayStudentInfoList(true);
-    createWindowListShortcutKeys();
 }
 
 function processOnKeyPress(event) {
@@ -586,21 +585,28 @@ function getGlobalStudentId() {
     let globalStudentId = localStorage.getItem('global_student_id');
     let studentInfoList = localStorage.getItem('students');
 
+    let currentStudents;
+    let maxStudentId;
+
     if (globalStudentId && globalStudentId.length > 0) {
         if (studentInfoList && studentInfoList != '[]') {
-            let currentStudentTotal = JSON.parse(studentInfoList.trim()).length;
+            currentStudents = JSON.parse(studentInfoList.trim());
+            maxStudentId    = findMaxNumber(parseInt(currentStudents[0].id), currentStudents.length);
 
             if (!/^[0-9]+$/.test(globalStudentId)) {
-                globalStudentId = (currentStudentTotal + 1).toString();
-            } else if (parseInt(globalStudentId) <= currentStudentTotal) {
-                globalStudentId = (currentStudentTotal + 1).toString();
+                globalStudentId = (maxStudentId + 1).toString();
+            } else if (parseInt(globalStudentId) <= maxStudentId) {
+                globalStudentId = (maxStudentId + 1).toString();
             }
         } else {
             globalStudentId = '1';
         }
     } else {
         if (studentInfoList && studentInfoList != '[]') {
-            globalStudentId = (JSON.parse(studentInfoList.trim()).length + 1).toString();
+            currentStudents = JSON.parse(studentInfoList.trim());
+            maxStudentId    = findMaxNumber(parseInt(currentStudents[0].id), currentStudents.length);
+
+            globalStudentId = (maxStudentId + 1).toString();
         } else {
             globalStudentId = '1';
         }

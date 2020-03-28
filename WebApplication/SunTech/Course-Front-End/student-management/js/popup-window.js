@@ -43,21 +43,6 @@ function createWindowHelpFilterSearch() {
                 <div class="heading">
                     <i class="fa fa-circle" aria-hidden="true"></i>
                     <div class="text">
-                        Để tìm các sinh viên có Họ là Nguyễn
-                    </div>
-                </div>
-                <div class="content">
-                    <i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                    <div class="text">
-                        Nhập vào TextBox: ^Nguyễn hoặc ^nguyễn
-                    </div>
-                </div>
-            </div>
-
-            <div class="example">
-                <div class="heading">
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                    <div class="text">
                         Để tìm các sinh viên có Tên là Bình
                     </div>
                 </div>
@@ -73,7 +58,7 @@ function createWindowHelpFilterSearch() {
                 <div class="heading">
                     <i class="fa fa-circle" aria-hidden="true"></i>
                     <div class="text">
-                        Để tìm các sinh viên có <span class="highlight">Họ là Nguyễn và Tên là Bình</span>
+                        Để tìm các sinh viên có <span class="highlight">Họ là Nguyễn & Tên là Bình</span>
                     </div>
                 </div>
                 <div class="content">
@@ -264,7 +249,7 @@ function createWindowIntroduceProduct() {
                     <span class="text">Phiên bản</span>:
                 </div>
                 <div class="content">
-                    2.1.1 (03/2020)
+                    2.2.1 (03/2020)
                 </div>
             </div>
 
