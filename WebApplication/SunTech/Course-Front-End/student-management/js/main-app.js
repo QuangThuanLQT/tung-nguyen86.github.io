@@ -22,9 +22,11 @@ var tblStudentInfoList      = document.getElementById('tblStudentInfoList');
 var currentStudentId        = MINUS_ONE_NUMBER;
 var currentTableRowIndex    = MINUS_ONE_NUMBER;
 
+var students                = [];
+var foundStudents           = [];
+
 var errorDetails;
-var students = [];
-var foundStudents = [];
+var currentActiveElement;
 /* ------ End Global Variables Declaration ------*/
 
 /* ------ Start Functions Declaration ------*/
@@ -37,43 +39,89 @@ txtHomeTown.onkeypress      = function() { processOnKeyPress(event); }
 radMale.onkeypress          = function() { processOnKeyPress(event); }
 radFemale.onkeypress        = function() { processOnKeyPress(event); }
 
-btnSaveStudentInfo.onclick  = function() { saveStudentInfo(); }
+btnSaveStudentInfo.onclick  = function() { processOnSaveStudentInfo(); }
 divResetStudentInfo.onclick = function() { resetStudentForm(); }
 
 function processOnLoadPage() {
-    resetFilterSearchForm();
-    resetStudentForm();
-
     try {
-        initializeAllNotificationSettings();
-        initializeGlobalStudentId();
-        displayStudentInfoList(true);
+        loadPage();
     } catch(exception) {
-        renderTableForErrorInfo();
+        resetFilterSearchForm();
+        resetStudentForm(false);
+
+        if (typeof(exception.messageForAlertNotification) === 'undefined' || 
+            typeof(exception.messageForStudentDataTable) === 'undefined') {
+            handleUndefinedException();
+        } else {
+            initializeSettingsWhenException(exception.messageForAlertNotification);
+            renderTableForErrorInfo(exception.messageForStudentDataTable);
+        }
     }
+}
+
+function loadPage() {
+    handleExceptionsForPage();
+
+    let isOpeningIntroRunBefore = localStorage.getItem('isOpeningIntroRunBefore');
+
+    if (isOpeningIntroRunBefore) {
+        if (isOpeningIntroRunBefore === '0') {
+            chkOpeningIntroRun.checked = true;
+            loadPageWithOpeningIntro();
+        } else {
+            if (isOpeningIntroRunBefore !== '1') {
+                localStorage.setItem('isOpeningIntroRunBefore', '1');
+            }
+
+            chkOpeningIntroRun.checked = false;
+            loadPageNormally();
+        }
+    } else {
+        localStorage.setItem('isOpeningIntroRunBefore', '1');
+        chkOpeningIntroRun.checked = false;
+        loadPageWithOpeningIntro();
+    }
+}
+
+function loadPageWithOpeningIntro() {
+    showOpeningIntro();
+    setTimeout(function() { hideOpeningIntro(); }, 6500);
+    setTimeout(function() { loadPageNormally(); }, 9500);
+}
+
+function loadPageNormally() {
+    resetFilterSearchForm();
+    initializeAllNotificationSettings();
+    initializeGlobalStudentId();
+
+    resetStudentForm(false);
+    displayStudentInfoList(true);
 }
 
 function processOnKeyPress(event) {
     // Handle when end-user press Enter key on the keyboard.
     if (event.keyCode === 13) {
         event.preventDefault();
+        processOnSaveStudentInfo();
+    }
+}
+
+function processOnSaveStudentInfo() {
+    try {
         saveStudentInfo();
+    } catch(exception) {
+        btnSaveStudentInfo.blur();
+
+        if (typeof(exception.messageForAlertNotification) === 'undefined') {
+            handleUndefinedException(false);
+        } else {
+            sendAlertNotification(`${exception.messageForAlertNotification}`, 8000);
+        }
     }
 }
 
 function saveStudentInfo() {
-    try {
-        saveStudentInfoWithExceptionHandler();
-    } catch(exception) {
-        sendAlertNotification(`
-            Chức năng này không khả dụng do Trình duyệt hiện tại không hỗ trợ lưu trữ dữ liệu (Local Storage).<br>
-            Bạn vui lòng sử dụng Trình duyệt khác như: Chrome, Opera hoặc FireFox.
-        `, 5000);
-    }
-}
-
-function saveStudentInfoWithExceptionHandler() {
-    handleExceptionOfLocalStorage();
+    handleExceptionsForPage();
 
     let fullName        = txtFullName.value.trim();
     let emailAddress    = txtEmailAddress.value.trim();
@@ -167,110 +215,130 @@ function setEffectForStudentForm(isValidStudent) {
 }
 
 function addStudent(student) {
-    handleExceptionOfLocalStorage();
-
     if (student && errorDetails.length === 0) {
-        if (window.confirm(`Bạn chắc chắn muốn thêm sinh viên ${student.fullName} vào Danh sách ?`)) {
-            let newPhoneNumber = standardizePhoneNumber(student.phoneNumber);
-            txtPhoneNumber.value = newPhoneNumber;
-            student.phoneNumber = newPhoneNumber;
+        currentActiveElement = document.activeElement;
 
-            students.unshift(student);
-            localStorage.setItem('students', JSON.stringify(students));
+        confirmBeforeChange(
+            'Hộp thoại xác nhận Thêm', 
+            `Bạn chắc chắn muốn thêm sinh viên<br>${student.fullName} vào Danh sách ?`, 
+            currentActiveElement, 
+            function(isConfirmationOk) {
+                if (isConfirmationOk) {
+                    let newPhoneNumber = standardizePhoneNumber(student.phoneNumber);
+                    txtPhoneNumber.value = newPhoneNumber;
+                    student.phoneNumber = newPhoneNumber;
 
-            setGlobalStudentId((parseInt(student.id) + 1).toString());
-            displayStudentInfoListAfterSaving(student.id, ACTION_ADD_STUDENT);
+                    students.unshift(student);
+                    localStorage.setItem('students', JSON.stringify(students));
 
-            let addingTableRow = document.querySelector('div.list-student table tr:not(#first-row)');
-            setTimeout(function() { addingTableRow.classList.add('added-row'); }, 10);
+                    setGlobalStudentId((parseInt(student.id) + 1).toString());
+                    displayStudentInfoListAfterSaving(student.id, ACTION_ADD_STUDENT);
 
-            if (chkNotificationAdd.checked === true) {
-                setTimeout(function() { sendNotification(ACTION_ADD_STUDENT, student.fullName); }, 700);
+                    let addingTableRow = document.querySelector('div.list-student table tr:not(#first-row)');
+                    setTimeout(function() { addingTableRow.classList.add('added-row'); }, 10);
+
+                    if (chkNotificationAdd.checked === true) {
+                        setTimeout(function() { sendNotification(ACTION_ADD_STUDENT, student.fullName); }, 700);
+                    }
+                }
             }
-        }
+        );
     } else {
         return;
     }
 }
 
 function updateStudent(student) {
-    handleExceptionOfLocalStorage();
-
     if (student && errorDetails.length === 0 && currentStudentId !== MINUS_ONE_NUMBER) {
-        if (window.confirm(`Bạn chắc chắn muốn cập nhật Thông tin sinh viên ${student.fullName} trong Danh sách ?`)) {
-            let newPhoneNumber = standardizePhoneNumber(student.phoneNumber);
+        currentActiveElement = document.activeElement;
 
-            txtPhoneNumber.value = newPhoneNumber;
-            student.phoneNumber = newPhoneNumber;
+        confirmBeforeChange(
+            'Hộp thoại xác nhận Sửa', 
+            `Bạn chắc chắn muốn cập nhật Thông tin sinh viên<br>${student.fullName} trong Danh sách ?`, 
+            currentActiveElement, 
+            function(isConfirmationOk) {
+                if (isConfirmationOk) {
+                    let newPhoneNumber = standardizePhoneNumber(student.phoneNumber);
 
-            let index = findIndexOfItemByIdInArray(students, currentStudentId);
-            students[index] = student;
-            localStorage.setItem('students', JSON.stringify(students));
+                    txtPhoneNumber.value = newPhoneNumber;
+                    student.phoneNumber = newPhoneNumber;
 
-            displayStudentInfoListAfterSaving(currentStudentId, ACTION_UPDATE_STUDENT);
+                    let index = findIndexOfItemByIdInArray(students, currentStudentId);
+                    students[index] = student;
+                    localStorage.setItem('students', JSON.stringify(students));
 
-            if (currentTableRowIndex >= 0) {
-                setBgColorOfCurrentTableRow(currentTableRowIndex, ACTION_UPDATE_STUDENT);
-                currentLocationFromTop = getLocationFromTopOfTableRow(currentTableRowIndex);
+                    displayStudentInfoListAfterSaving(currentStudentId, ACTION_UPDATE_STUDENT);
+
+                    if (currentTableRowIndex >= 0) {
+                        setBgColorOfCurrentTableRow(currentTableRowIndex, ACTION_UPDATE_STUDENT);
+                        currentLocationFromTop = getLocationFromTopOfTableRow(currentTableRowIndex);
+                    }
+
+                    setTimeout(function() { scrollBackToFocusedTableRow(); }, 400);
+
+                    if (chkNotificationUpdate.checked === true) {
+                        setTimeout(function() { sendNotification(ACTION_UPDATE_STUDENT, student.fullName); }, 1000);
+                    }
+                }
             }
-
-            setTimeout(function() { scrollBackToFocusedTableRow(); }, 400);
-
-            if (chkNotificationUpdate.checked === true) {
-                setTimeout(function() { sendNotification(ACTION_UPDATE_STUDENT, student.fullName); }, 1000);
-            }
-        }
+        );
     } else {
         return;
     }
 }
 
 function deleteStudent(studentId, sourceElementObject, sourceElementType) {
-    handleExceptionOfLocalStorage();
+    let index            = findIndexOfItemByIdInArray(students, studentId);
+    let fullName         = students[index].fullName;
+    currentActiveElement = document.activeElement;
 
-    let index = findIndexOfItemByIdInArray(students, studentId);
-    let fullName = students[index].fullName;
+    confirmBeforeChange(
+        'Hộp thoại xác nhận Xóa', 
+        `Bạn chắc chắn muốn xóa sinh viên<br>${fullName} khỏi Danh sách ?`, 
+        currentActiveElement, 
+        function(isConfirmationOk) {
+            if (isConfirmationOk) {
+                students.splice(index, 1);
+                localStorage.setItem('students', JSON.stringify(students));
 
-    if (window.confirm(`Bạn chắc chắn muốn xóa sinh viên ${fullName} khỏi Danh sách ?`)) {
-        students.splice(index, 1);
-        localStorage.setItem('students', JSON.stringify(students));
+                sourceElementType = sourceElementType.toLowerCase().trim();
+                let deletingTableRow;
 
-        sourceElementType = sourceElementType.toLowerCase().trim();
-        let deletingTableRow;
-
-        if (sourceElementType === 'table-row' || sourceElementType === 'row') {
-            deletingTableRow = sourceElementObject;
-        } else if (sourceElementType === 'link-tag' || sourceElementType === 'link') {
-            deletingTableRow = sourceElementObject.parentNode.parentNode.parentNode;
-        } else {
-            return;
-        }
-
-        if (deletingTableRow) {
-            deletingTableRow.classList.remove('added-row');
-            deletingTableRow.classList.add('deleted-row');
-
-            if (chkNotificationDelete.checked === true) {
-                setTimeout(function() { sendNotification(ACTION_DELETE_STUDENT, fullName); }, 450);
-            }
-
-            setTimeout(function() {
-                displayStudentInfoList();
-
-                if (studentId === currentStudentId) {
-                    resetStudentForm(false);
+                if (sourceElementType === 'table-row' || sourceElementType === 'row') {
+                    deletingTableRow = sourceElementObject;
+                } else if (sourceElementType === 'link-tag' || sourceElementType === 'link') {
+                    deletingTableRow = sourceElementObject.parentNode.parentNode.parentNode;
                 } else {
-                    if (studentId > currentStudentId) {
-                        currentTableRowIndex--;
+                    return;
+                }
+
+                if (deletingTableRow) {
+                    deletingTableRow.classList.remove('added-row');
+                    deletingTableRow.classList.add('deleted-row');
+
+                    if (chkNotificationDelete.checked === true) {
+                        setTimeout(function() { sendNotification(ACTION_DELETE_STUDENT, fullName); }, 450);
                     }
 
-                    if (currentTableRowIndex >= 0) {
-                        setBgColorOfCurrentTableRow(currentTableRowIndex);
-                    }
+                    setTimeout(function() {
+                        displayStudentInfoList();
+
+                        if (studentId === currentStudentId) {
+                            resetStudentForm(false);
+                        } else {
+                            if (studentId > currentStudentId) {
+                                currentTableRowIndex--;
+                            }
+
+                            if (currentTableRowIndex >= 0) {
+                                setBgColorOfCurrentTableRow(currentTableRowIndex);
+                            }
+                        }
+                    }, 500);
                 }
-            }, 500);
+            }
         }
-    }
+    );
 }
 
 function getStudentById(arrayOfStudents, studentId) {
@@ -284,8 +352,6 @@ function getStudentById(arrayOfStudents, studentId) {
 }
 
 function displayStudentInfoList(isFirstFunctionCallOnLoadPage = false) {
-    handleExceptionOfLocalStorage();
-
     let studentInfoList = localStorage.getItem('students');
 
     if (studentInfoList && studentInfoList != '[]') {
@@ -361,11 +427,12 @@ function renderStudentDataTable(arrayOfStudents, actionType = EMPTY_STRING) {
                     loadStudentInfo(${studentId}, ${index}, '${ACTION_UPDATE_STUDENT}', false);
                 }, 200);
                 currentLocationFromTop = (document.documentElement.scrollTop || document.body.scrollTop);
+                tableRowIndexBeforeUpdate = ${index};
             `;
 
             functionCallFromEditLinkTag = `
                 setBgColorOfFocusedTableRow(this, 'link-tag');
-                setTimeout(function() { scrollTopToFocusForm(); }, 150);
+                setTimeout(function() { scrollTopToFocusForm(${index}); }, 150);
                 setTimeout(function() {
                     loadStudentInfo(${studentId}, ${index}, '${ACTION_UPDATE_STUDENT}');
                 }, 200);
@@ -374,7 +441,8 @@ function renderStudentDataTable(arrayOfStudents, actionType = EMPTY_STRING) {
             functionCallFromDeleteLinkTag = `deleteStudent(${studentId}, this, 'link-tag')`;
 
             functionCallFromCopyLinkTag = `
-                scrollTopToFocusForm();
+                scrollTopToFocusForm(${index});
+                resetBgColorOfAllTableRows();
                 setTimeout(function() {
                     loadStudentInfo(${studentId}, ${index}, '${ACTION_ADD_STUDENT}');
                 }, 50);
@@ -390,7 +458,7 @@ function renderStudentDataTable(arrayOfStudents, actionType = EMPTY_STRING) {
             }
 
             tableContent += `
-                ${prefixTableRow} tabindex="0" 
+                ${prefixTableRow} tabindex="2" 
                 onkeydown="processOnKeyDownTableRow(
                     event, this, ${index - 1}, ${totalOfStudents}, 
                     ${studentIdInfo.previousStudentId}, 
@@ -603,13 +671,10 @@ function resetEffectForStudentForm() {
 }
 
 function initializeGlobalStudentId() {
-    handleExceptionOfLocalStorage();
     localStorage.setItem('global_student_id', getGlobalStudentId());
 }
 
 function getGlobalStudentId() {
-    handleExceptionOfLocalStorage();
-
     let globalStudentId = localStorage.getItem('global_student_id');
     let studentInfoList = localStorage.getItem('students');
 
@@ -644,7 +709,6 @@ function getGlobalStudentId() {
 }
 
 function setGlobalStudentId(globalStudentId) {
-    handleExceptionOfLocalStorage();
     localStorage.setItem('global_student_id', globalStudentId);
 }
 /* ------ End Functions Declaration ------*/

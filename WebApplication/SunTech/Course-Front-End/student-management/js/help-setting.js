@@ -1,22 +1,22 @@
 
 /* ------ Start Global Variables Declaration ------*/
-var divPageContainer    = document.querySelector('div.container');
-var divHelpSettingIcon  = document.getElementById('divHelpSettingIcon');
-var divOuterAngleUpArea = document.querySelector('div.help-setting-box-container div.outer-angle-up-area');
-var divInnerAngleUpArea = document.querySelector('div.help-setting-box-container div.inner-angle-up-area');
-var divHelpSettingBox   = document.querySelector('div.help-setting-box-container div.help-setting-box');
+var divPageContainer                = document.querySelector('div.container');
+var divHelpSettingIcon              = document.getElementById('divHelpSettingIcon');
+var divOuterAngleUpArea             = document.querySelector('div.help-setting-box-container div.outer-angle-up-area');
+var divInnerAngleUpArea             = document.querySelector('div.help-setting-box-container div.inner-angle-up-area');
+var divHelpSettingBox               = document.querySelector('div.help-setting-box-container div.help-setting-box');
 
-var litResetFilterSearchForm = document.getElementById('litResetFilterSearchForm');
-var litResetWindowPosition   = document.getElementById('litResetWindowPosition');
-var litHelpFilterSearch      = document.getElementById('litHelpFilterSearch');
-var litListShortcutKeys      = document.getElementById('litListShortcutKeys');
-var litIntroduceProduct      = document.getElementById('litIntroduceProduct');
+var litResetFilterSearchForm        = document.getElementById('litResetFilterSearchForm');
+var litResetWindowPosition          = document.getElementById('litResetWindowPosition');
+var litHelpFilterSearch             = document.getElementById('litHelpFilterSearch');
+var litListShortcutKeys             = document.getElementById('litListShortcutKeys');
+var litIntroduceProduct             = document.getElementById('litIntroduceProduct');
 
-var divOverlayFullScreen     = document.getElementById('divOverlayFullScreen');
-var winHelpFilterSearch      = document.getElementById('winHelpFilterSearch');
-var winListShortcutKeys      = document.getElementById('winListShortcutKeys');
-var winIntroduceProduct      = document.getElementById('winIntroduceProduct');
-var divClosePopupWindow      = null;
+var divOverlayFullScreen            = document.getElementById('divOverlayFullScreen');
+var winHelpFilterSearch             = document.getElementById('winHelpFilterSearch');
+var winListShortcutKeys             = document.getElementById('winListShortcutKeys');
+var winIntroduceProduct             = document.getElementById('winIntroduceProduct');
+var divClosePopupWindow             = null;
 
 var isWindowHelpFilterSearchCreated = false;
 var isWindowListShortcutKeysCreated = false;
@@ -24,17 +24,22 @@ var isWindowIntroduceProductCreated = false;
 /* ------ End Global Variables Declaration ------*/
 
 /* ------ Start Functions Declaration ------*/
-window.onkeydown                 = function() { processOnKeyDownPage(event); }
-divHelpSettingIcon.onclick       = function() { processHelpSettingBox(); }
-litResetFilterSearchForm.onclick = function() { refreshFilterSearchForm(); }
-litResetWindowPosition.onclick   = function() { resetDefaultPositionOfWindow(); }
-litHelpFilterSearch.onclick      = function() { processWindowHelpFilterSearch(); }
-litListShortcutKeys.onclick      = function() { processWindowListShortcutKeys(); }
-litIntroduceProduct.onclick      = function() { processWindowIntroduceProduct(); }
+window.onkeydown                    = function() { processOnKeyDownPage(event); }
+divHelpSettingIcon.onclick          = function() { processHelpSettingBox(); }
+litResetFilterSearchForm.onclick    = function() { refreshFilterSearchForm(); }
+litResetWindowPosition.onclick      = function() { resetDefaultPositionOfWindow(); }
+litHelpFilterSearch.onclick         = function() { processWindowHelpFilterSearch(); }
+litListShortcutKeys.onclick         = function() { processWindowListShortcutKeys(); }
+litIntroduceProduct.onclick         = function() { processWindowIntroduceProduct(); }
 
 function processOnKeyDownPage(event) {
     // Handle when end-user press Escape key on the keyboard.
     if (event.keyCode === 27) {
+        if (boxConfirmContainer.className.toLowerCase().indexOf('hidden-overlay') === -1) {
+            confirmCancel(currentActiveElement, function() {});
+            return;
+        }
+
         if (divOverlayFullScreen.className.toLowerCase().indexOf('hidden-overlay') === -1) {
             hideOverlayFullScreen();
             return;

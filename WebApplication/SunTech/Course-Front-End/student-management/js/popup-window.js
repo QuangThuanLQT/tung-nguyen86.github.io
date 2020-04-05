@@ -242,7 +242,7 @@ function createWindowIntroduceProduct() {
         ${WINDOW_HEADER}
         <div class="main-area">
             <h2>JavaScript Case Study</h2>
-            <h3>Mini-Project Quản lý Sinh viên</h3>
+            <h3>Student Management Program</h3>
 
             <div class="line">
                 <div class="heading">

@@ -20,6 +20,10 @@
     div.list-student table {
         width: 100%;
     }
+
+    div#winConfirmBeforeChange {
+        left: calc(50% + 16px);
+    }
 }
 
 @media only screen and (max-width: 1150px) {
@@ -48,6 +52,11 @@
     div.list-student button#btnScrollTop {
         padding: 3px 6px;
     }
+
+    div#winConfirmBeforeChange {
+        top: calc(45% + 13px);
+        left: 50%;
+    }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -60,6 +69,10 @@
     div.delete-notification, 
     div.alert-notification {
         bottom: 22px;
+    }
+
+    div#winConfirmBeforeChange {
+        top: calc(31% + 12px);
     }
 }
 
@@ -94,6 +107,10 @@
 
     div.notification {
         right: 16px;
+    }
+
+    div#winConfirmBeforeChange {
+        top: calc(41% + 15px);
     }
 }
 
@@ -193,6 +210,7 @@
         display: block;
         text-align: right;
         width: 100%;
+        padding: 6px 6px 1px;
     }
 
     div.list-student table tr.no-data-found td, 
@@ -223,6 +241,7 @@
 
     div.list-student table tr td div {
         padding: 5px 10px;
+        margin-top: -5px;
     }
 
     div.list-student table tr.hidden-row, 
@@ -288,6 +307,29 @@
         padding-top: 8.75px;
         padding-bottom: 8.75px;
     }
+
+    div#divOpeningIntro div.header-area {
+        top: 50px;
+    }
+
+    div#divOpeningIntro.visible-overlay div.header-area {
+        top: 50px;
+    }
+
+    div#divOpeningIntro div.main-area h2 {
+        font-size: 28px;
+        margin-bottom: 25px;
+    }
+
+    div#divOpeningIntro div.main-area h3 {
+        font-size: 22px;
+        margin-bottom: 40px;
+    }
+
+    div#divOpeningIntro div.main-area div.line {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
 }
 
 @media only screen and (max-width: 480px) {
@@ -306,10 +348,6 @@
     div.list-student table tr.error-info {
         height: 90px;
         font-size: 13px;
-    }
-
-    div.list-student table tr td {
-        padding: 5px 6px;
     }
 
     div.list-student button#btnScrollTop {
@@ -365,6 +403,10 @@
     div.popup-window div.main-area div.line div.content {
         line-height: 1.8;
         margin-top: -4px;
+    }
+
+    div#winConfirmBeforeChange {
+        width: 94%;
     }
 }
 
@@ -433,6 +475,18 @@
     div.help-setting-box-container div.help-setting-box ul li:last-child {
         padding-top: 8.5px;
         padding-bottom: 8.5px;
+    }
+
+    div#divOpeningIntro div.main-area {
+        top: 45%;
+    }
+
+    div#divOpeningIntro.visible-overlay div.main-area {
+        top: 45%;
+    }
+
+    div#winConfirmBeforeChange {
+        top: calc(48% + 10px);
     }
 }
 
@@ -594,6 +648,33 @@
     div.popup-window div.main-area div.line div.content span.highlight {
         display: inline-block;
     }
+
+    div#divOpeningIntro div.header-area img {
+        width: 89px;
+    }
+
+    div#divOpeningIntro div.main-area {
+        width: 98%;
+    }
+
+    div#divOpeningIntro div.main-area h2 {
+        font-size: 25px;
+        margin-bottom: 25px;
+    }
+
+    div#divOpeningIntro div.main-area h3 {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+
+    div#divOpeningIntro div.main-area div.line {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    div#winConfirmBeforeChange {
+        top: calc(53% + 5px);
+    }
 }
 
 @media only screen and (max-width: 320px) {
@@ -636,7 +717,7 @@
     }
 
     div.list-student table tr td {
-        padding: 5px 4px;
+        padding: 5px 4px 0px;
     }
 
     div.list-student table tr td.col-order {
@@ -744,5 +825,38 @@
 
     div.popup-window div.main-area div.line {
         font-size: 12px;
+    }
+
+    div#divOpeningIntro div.main-area h2 {
+        font-size: 23px;
+    }
+
+    div#divOpeningIntro div.main-area h3 {
+        font-size: 18px;
+    }
+
+    div#divOpeningIntro div.main-area div.line {
+        font-size: 12.5px;
+    }
+
+    div#winConfirmBeforeChange {
+        top: calc(60% + 10px);
+    }
+
+    div#winConfirmBeforeChange div.header-area div.left-item {
+        font-size: 12px;
+    }
+
+    div#winConfirmBeforeChange div.header-area div.right-item {
+        font-size: 22px;
+    }
+
+    div#winConfirmBeforeChange div.main-area div.content {
+        font-size: 12px;
+    }
+
+    div#winConfirmBeforeChange div.main-area div.action button {
+        font-size: 13px;
+        padding: 3px 12px;
     }
 }

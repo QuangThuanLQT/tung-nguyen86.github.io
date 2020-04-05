@@ -238,24 +238,42 @@ function findMaxNumber(number_1, number_2) {
     }
 }
 
-function handleExceptionOfLocalStorage() {
-    if (typeof(localStorage) === 'undefined') {
-        throw "Local Storage is not supported by the current browser !!!";
-    }
+function getCurrentBrowser() {
+    let isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+
+    if (isChrome) { return 'Chrome'; }
+
+    let isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+    if (isOpera) { return 'Opera'; }
+
+    let isFirefox = typeof InstallTrigger !== 'undefined';
+
+    if (isFirefox) { return 'Firefox'; }
+
+    let isIE = false || !!document.documentMode;
+
+    if (isIE) { return 'IE'; }
+
+    let isEdge = !isIE && !!window.StyleMedia;
+
+    if (isEdge) { return 'Edge'; }
+
+    let isSafari = /constructor/i.test(window.HTMLElement) || (function (p) {
+        return p.toString() === "[object SafariRemoteNotification]"; 
+    })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+
+    if (isSafari) { return 'Safari'; }
+
+    // Detect the Blink Engine
+    let isBlink = (isChrome || isOpera) && !!window.CSS;
+
+    if (isBlink) { return 'Blink'; }
+
+    return 'Chrome';
 }
 
-function renderTableForErrorInfo() {
-    let tableContent = TABLE_HEADER;
-
-    tableContent += `
-        <tr class="error-info">
-            <td align="center" colspan="${TABLE_COLUMN_COUNT}">
-                Trình duyệt hiện tại không hỗ trợ lưu trữ dữ liệu (Local Storage).<br>
-                Bạn vui lòng sử dụng Trình duyệt khác như: Chrome, Opera hoặc FireFox.
-            </td>
-        </tr>
-    `;
-
-    tblStudentInfoList.innerHTML = tableContent;
+function getVerticalScrollbarWidthOfPage() {
+    return (window.innerWidth - document.documentElement.clientWidth);
 }
 /* ------ End Functions Declaration ------*/

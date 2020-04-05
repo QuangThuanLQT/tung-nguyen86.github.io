@@ -50,7 +50,7 @@ function sendAddNotification(studentFullName) {
 
     divAddNotificationList.innerHTML += `
         <div class="notification">
-            Thêm mới thành công sinh viên ${studentFullName} !
+            <font color='#ffff00'>Thêm mới thành công</font> sinh viên <font color='#ffff00'>${studentFullName}</font> !
         </div>
     `;
 
@@ -86,7 +86,7 @@ function sendUpdateNotification(studentFullName) {
 
     divUpdateNotificationList.innerHTML += `
         <div class="notification">
-            Cập nhật thành công dữ liệu về sinh viên ${studentFullName} !
+            <font color='#ffff00'>Cập nhật thành công</font> dữ liệu về sinh viên <font color='#ffff00'>${studentFullName}</font> !
         </div>
     `;
 
@@ -122,7 +122,7 @@ function sendDeleteNotification(studentFullName) {
 
     divDeleteNotificationList.innerHTML += `
         <div class="notification">
-            Xóa thành công dữ liệu của sinh viên ${studentFullName} !
+            <font color='#ffff00'>Xóa thành công</font> dữ liệu của sinh viên <font color='#ffff00'>${studentFullName}</font> !
         </div>
     `;
 

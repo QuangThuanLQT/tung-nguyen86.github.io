@@ -1,7 +1,10 @@
 
 /* ------ Start Global Variables Declaration ------*/
-var btnScrollTop = document.getElementById('btnScrollTop');
-var currentLocationFromTop = 0;
+var btnScrollTop              = document.getElementById('btnScrollTop');
+var currentClassNameOfCss     = EMPTY_STRING;
+var currentLocationFromTop    = 0;
+var currentHeightOfSettingBox = 0;
+var tableRowIndexBeforeUpdate = 0;
 /* ------ End Global Variables Declaration ------*/
 
 /* ------ Start Functions Declaration ------*/
@@ -40,9 +43,14 @@ function processOnScroll() {
 btnScrollTop.onclick = function() { scrollTopOfPage(); }
 
 function scrollTopOfPage() {
-    var locationFromTop = (document.documentElement.scrollTop || document.body.scrollTop);
+    let locationFromTop     = (document.documentElement.scrollTop || document.body.scrollTop);
+    currentClassNameOfCss   = divAdvanceSettingIcon.className.toLowerCase();
 
-    var interval = setInterval(function() {
+    if (currentClassNameOfCss === 'transformed-menu') {
+        currentHeightOfSettingBox = divSettingBoxContainer.offsetHeight;
+    }
+
+    let interval = setInterval(function() {
         window.scrollTo(0, locationFromTop);
         locationFromTop -= 100;
 
@@ -52,11 +60,17 @@ function scrollTopOfPage() {
     }, 20);
 }
 
-function scrollTopToFocusForm() {
-    var locationFromTop = (document.documentElement.scrollTop || document.body.scrollTop);
-    currentLocationFromTop = locationFromTop;
+function scrollTopToFocusForm(tableRowIndex) {
+    let locationFromTop         = (document.documentElement.scrollTop || document.body.scrollTop);
+    currentLocationFromTop      = locationFromTop;
+    currentClassNameOfCss       = divAdvanceSettingIcon.className.toLowerCase();
+    tableRowIndexBeforeUpdate   = tableRowIndex;
 
-    var interval = setInterval(function() {
+    if (currentClassNameOfCss === 'transformed-menu') {
+        currentHeightOfSettingBox = divSettingBoxContainer.offsetHeight;
+    }
+
+    let interval = setInterval(function() {
         window.scrollTo(0, locationFromTop);
         locationFromTop -= 80;
 
@@ -67,13 +81,16 @@ function scrollTopToFocusForm() {
 }
 
 function scrollBackToFocusedTableRow() {
-    var startLocation = 0;
+    let startLocation = 0;
 
-    var interval = setInterval(function() {
+    let interval = setInterval(function() {
         window.scrollTo(currentLocationFromTop, startLocation);
         startLocation += 100;
 
-        if (startLocation >= (currentLocationFromTop + 100)) {
+        if (startLocation > currentLocationFromTop) {
+            startLocation -= 100;
+            startLocation += (currentLocationFromTop % 100);
+            window.scrollTo(currentLocationFromTop, startLocation);
             clearInterval(interval);
         }
     }, 20);
@@ -82,10 +99,22 @@ function scrollBackToFocusedTableRow() {
 function getLocationFromTopOfTableRow(tableRowIndex) {
     let tableRowList        = document.querySelectorAll('div.list-student table tr:not(#first-row)');
     let tableRowObject      = tableRowList[tableRowIndex];
+    let heightOfTableRow    = parseInt(window.getComputedStyle(tableRowObject).height); //tableRowObject.offsetHeight
+    let distanceBetweenRows = parseInt(window.getComputedStyle(tableRowObject).marginBottom);
 
-    let offsetTopOfTableRow = tableRowObject.offsetTop;
-    let heightOfTableRow    = parseInt(window.getComputedStyle(tableRowObject).height);
+    let classNameOfCss      = divAdvanceSettingIcon.className.toLowerCase();
+    let locationFromTop     = currentLocationFromTop;
+    locationFromTop         += (tableRowIndex - tableRowIndexBeforeUpdate) * (heightOfTableRow + distanceBetweenRows);
 
-    return (offsetTopOfTableRow + heightOfTableRow * 2);
+    if (classNameOfCss !== currentClassNameOfCss) {
+        if (classNameOfCss === 'transformed-menu') {
+            currentHeightOfSettingBox = divSettingBoxContainer.offsetHeight;
+            locationFromTop += currentHeightOfSettingBox;
+        } else {
+            locationFromTop -= currentHeightOfSettingBox;
+        }
+    }
+
+    return locationFromTop;
 }
 /* ------ End Functions Declaration ------*/

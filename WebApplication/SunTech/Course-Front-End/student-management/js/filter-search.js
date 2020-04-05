@@ -20,8 +20,10 @@ function filterSearch() {
     foundStudents = getArrayOfSearchedStudents();
     displayStudentInfoListAfterSearching();
 
-    resetStudentForm();
-    txtKeywordSearch.focus();
+    if (btnSaveStudentInfo.value.toLowerCase().trim() === ACTION_UPDATE_STUDENT) {
+        resetStudentForm(false);
+    }
+    divSettingBoxContainer.focus();
 }
 
 function getArrayOfSearchedStudents() {

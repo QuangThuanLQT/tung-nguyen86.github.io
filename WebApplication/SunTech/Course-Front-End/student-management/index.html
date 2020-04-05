@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mini-Project | Student Management</title>
+    <title>Student Management Program</title>
     <link rel="shortcut icon" type="image/png" href="./images/suntech_logo.png"/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap&subset=vietnamese" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="./css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="./css/main-style.css">
+    <link rel="stylesheet" type="text/css" href="./css/opening-intro-style.css">
+    <link rel="stylesheet" type="text/css" href="./css/confirmation-window-style.css">
     <link rel="stylesheet" type="text/css" href="./css/minimize-form-style.css">
     <link rel="stylesheet" type="text/css" href="./css/advance-setting-style.css">
     <link rel="stylesheet" type="text/css" href="./css/help-setting-style.css">
@@ -27,32 +29,32 @@
             <h3>Thông tin sinh viên</h3>
 
             <label>Họ và Tên:</label>
-            <input type="text" id="txtFullName">
+            <input type="text" id="txtFullName" tabindex="1">
             <br>
 
             <label>Địa chỉ Email:</label>
-            <input type="text" id="txtEmailAddress">
+            <input type="text" id="txtEmailAddress" tabindex="1">
             <br>
 
             <label>Số điện thoại:</label>
-            <input type="text" id="txtPhoneNumber">
+            <input type="text" id="txtPhoneNumber" tabindex="1">
             <br>
 
             <label>Quê quán:</label>
-            <input type="text" id="txtHomeTown">
+            <input type="text" id="txtHomeTown" tabindex="1">
             <br>
 
             <label id="lblGender">Giới tính:</label>
-            <input type="radio" name="gender" id="male" value="1"> Nam
-            <input type="radio" name="gender" id="female" value="2"> Nữ
+            <input type="radio" name="gender" id="male" value="1" tabindex="1"> Nam
+            <input type="radio" name="gender" id="female" value="2" tabindex="1"> Nữ
             <br>
 
             <label></label>
             <div id="divErrorInfo"></div>
 
             <label></label>
-            <button type="button" id="btnSaveStudentInfo" value="add">Thêm mới</button>
-            <div id="divResetStudentInfo" title="Click để làm mới toàn bộ phần Thông tin sinh viên">
+            <button type="button" id="btnSaveStudentInfo" value="add" tabindex="1">Thêm mới</button>
+            <div id="divResetStudentInfo" tabindex="1" title="Click để làm mới toàn bộ phần Thông tin sinh viên">
                 <i class="fa fa-refresh" aria-hidden="true"></i>
             </div>
 
@@ -70,8 +72,8 @@
                     <div class="menu-bar-item-3"></div>
                 </div>
 
-                <!-- <div class="setting-box-container visible-setting-box-container"> -->
-                <div class="setting-box-container hidden-setting-box-container-2">
+                <!-- <div class="setting-box-container visible-setting-box-container" tabindex="-1"> -->
+                <div class="setting-box-container hidden-setting-box-container-2" tabindex="-1">
                     <div class="setting-box-header"></div>
 
                     <div class="help-setting-box-container">
@@ -174,6 +176,13 @@
                                 <span class="inner-circle"></span>
                             </label>
                         </div>
+                        <div class="setting-notification">
+                            <label>Chạy đoạn Giới thiệu mở đầu</label>
+                            <label class="switch-notification">
+                                <input type="checkbox" id="chkOpeningIntroRun">
+                                <span class="inner-circle"></span>
+                            </label>
+                        </div>
                     </div>
 
                     <div class="setting-box-footer"></div>
@@ -192,12 +201,38 @@
         </div>
     </div>
 
+    <div id="divOpeningIntro" class="hidden-overlay">
+        <div class="header-area">
+            <a href="https://www.facebook.com/suntech.edu.vn" target="_blank">
+                <img src="./images/suntech_logo.png" 
+                     alt="Trung tâm Đào tạo Lập trình SUNTECH VIỆT NAM" 
+                     title="Trung tâm Đào tạo Lập trình SUNTECH VIỆT NAM">
+            </a>
+        </div>
+        <div class="main-area hidden-main-area">
+            <h2>JavaScript Case Study</h2>
+            <h3>Chương trình Quản lý Sinh viên</h3>
+            <div class="line">
+                Tùng Nguyễn - Học viên <span class="highlight">Lớp Front End 4</span>
+            </div>
+            <div class="line">
+                Trung tâm Đào tạo Lập trình <span class="highlight">SUNTECH VIỆT NAM</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="boxConfirmContainer" class="hidden-overlay" tabindex="0">
+        <div id="winConfirmBeforeChange" class="hidden-window hidden-window-2" tabindex="0"></div>
+    </div>
+
     <div id="divAddNotificationList"></div>
     <div id="divUpdateNotificationList"></div>
     <div id="divDeleteNotificationList"></div>
     <div id="divAlertNotificationList"></div>
 
     <script src="./js/main-app.js"></script>
+    <script src="./js/opening-intro.js"></script>
+    <script src="./js/confirmation-window.js"></script>
     <script src="./js/validate-form.js"></script>
     <script src="./js/common-utils.js"></script>
     <script src="./js/minimize-form.js"></script>
@@ -210,5 +245,6 @@
     <script src="./js/filter-search.js"></script>
     <script src="./js/download-file.js"></script>
     <script src="./js/change-students.js"></script>
+    <script src="./js/handle-exception.js"></script>
 </body>
 </html>

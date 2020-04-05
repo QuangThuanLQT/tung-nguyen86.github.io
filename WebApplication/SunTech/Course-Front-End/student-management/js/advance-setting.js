@@ -1,17 +1,18 @@
 
 /* ------ Start Global Variables Declaration ------*/
-var divAdvanceSettingIcon   = document.getElementById('divAdvanceSettingIcon');
-var divSettingBoxContainer  = document.querySelector('div.advance-setting-container div.setting-box-container');
+var divAdvanceSettingIcon       = document.getElementById('divAdvanceSettingIcon');
+var divSettingBoxContainer      = document.querySelector('div.advance-setting-container div.setting-box-container');
 
-var txtKeywordSearch        = document.getElementById('txtKeywordSearch');
-var btnClearText            = document.getElementById('btnClearText');
-var selGender               = document.getElementById('selGender');
+var txtKeywordSearch            = document.getElementById('txtKeywordSearch');
+var btnClearText                = document.getElementById('btnClearText');
+var selGender                   = document.getElementById('selGender');
 
-var chkNotificationAdd      = document.getElementById('chkNotificationAdd');
-var chkNotificationUpdate   = document.getElementById('chkNotificationUpdate');
-var chkNotificationDelete   = document.getElementById('chkNotificationDelete');
+var chkNotificationAdd          = document.getElementById('chkNotificationAdd');
+var chkNotificationUpdate       = document.getElementById('chkNotificationUpdate');
+var chkNotificationDelete       = document.getElementById('chkNotificationDelete');
+var chkOpeningIntroRun          = document.getElementById('chkOpeningIntroRun');
 
-var isCtrlKeyPressed        = false;
+var isCtrlKeyPressed            = false;
 /* ------ End Global Variables Declaration ------*/
 
 /* ------ Start Functions Declaration ------*/
@@ -25,6 +26,7 @@ btnClearText.onclick            = function() { clearTextOfKeywordSearch(); }
 chkNotificationAdd.onclick      = function() { switchNotificationAdd(); }
 chkNotificationUpdate.onclick   = function() { switchNotificationUpdate(); }
 chkNotificationDelete.onclick   = function() { switchNotificationDelete(); }
+chkOpeningIntroRun.onclick      = function() { switchOpeningIntroRun(); }
 
 function processAdvanceSettingBox() {
     if (divAdvanceSettingIcon.className.toLowerCase() !== 'transformed-menu') {
@@ -117,53 +119,34 @@ function clearTextOfKeywordSearch() {
 }
 
 function switchNotificationAdd() {
-    try {
-        handleExceptionOfLocalStorage();
-
-        if (chkNotificationAdd.checked === true) {
-            localStorage.setItem('isAddNotificationSent', '1');
-        } else {
-            localStorage.setItem('isAddNotificationSent', '0');
-        }
-    } catch(exception) {
-        sendAlertNotification(`
-            Chức năng này không khả dụng do Trình duyệt hiện tại không hỗ trợ lưu trữ dữ liệu (Local Storage).<br>
-            Bạn vui lòng sử dụng Trình duyệt khác như: Chrome, Opera hoặc FireFox.
-        `, 4500);
+    if (chkNotificationAdd.checked === true) {
+        localStorage.setItem('isAddNotificationSent', '1');
+    } else {
+        localStorage.setItem('isAddNotificationSent', '0');
     }
 }
 
 function switchNotificationUpdate() {
-    try {
-        handleExceptionOfLocalStorage();
-
-        if (chkNotificationUpdate.checked === true) {
-            localStorage.setItem('isUpdateNotificationSent', '1');
-        } else {
-            localStorage.setItem('isUpdateNotificationSent', '0');
-        }
-    } catch(exception) {
-        sendAlertNotification(`
-            Chức năng này không khả dụng do Trình duyệt hiện tại không hỗ trợ lưu trữ dữ liệu (Local Storage).<br>
-            Bạn vui lòng sử dụng Trình duyệt khác như: Chrome, Opera hoặc FireFox.
-        `, 4500);
+    if (chkNotificationUpdate.checked === true) {
+        localStorage.setItem('isUpdateNotificationSent', '1');
+    } else {
+        localStorage.setItem('isUpdateNotificationSent', '0');
     }
 }
 
 function switchNotificationDelete() {
-    try {
-        handleExceptionOfLocalStorage();
+    if (chkNotificationDelete.checked === true) {
+        localStorage.setItem('isDeleteNotificationSent', '1');
+    } else {
+        localStorage.setItem('isDeleteNotificationSent', '0');
+    }
+}
 
-        if (chkNotificationDelete.checked === true) {
-            localStorage.setItem('isDeleteNotificationSent', '1');
-        } else {
-            localStorage.setItem('isDeleteNotificationSent', '0');
-        }
-    } catch(exception) {
-        sendAlertNotification(`
-            Chức năng này không khả dụng do Trình duyệt hiện tại không hỗ trợ lưu trữ dữ liệu (Local Storage).<br>
-            Bạn vui lòng sử dụng Trình duyệt khác như: Chrome, Opera hoặc FireFox.
-        `, 4500);
+function switchOpeningIntroRun() {
+    if (chkOpeningIntroRun.checked === true) {
+        localStorage.setItem('isOpeningIntroRunBefore', '0');
+    } else {
+        localStorage.setItem('isOpeningIntroRunBefore', '1');
     }
 }
 
@@ -174,8 +157,6 @@ function initializeAllNotificationSettings() {
 }
 
 function initializeNotificationAdd() {
-    handleExceptionOfLocalStorage();
-
     let isAddNotificationSent = localStorage.getItem('isAddNotificationSent');
 
     if (isAddNotificationSent) {
@@ -194,8 +175,6 @@ function initializeNotificationAdd() {
 }
 
 function initializeNotificationUpdate() {
-    handleExceptionOfLocalStorage();
-
     let isUpdateNotificationSent = localStorage.getItem('isUpdateNotificationSent');
 
     if (isUpdateNotificationSent) {
@@ -214,8 +193,6 @@ function initializeNotificationUpdate() {
 }
 
 function initializeNotificationDelete() {
-    handleExceptionOfLocalStorage();
-
     let isDeleteNotificationSent = localStorage.getItem('isDeleteNotificationSent');
 
     if (isDeleteNotificationSent) {
@@ -231,5 +208,22 @@ function initializeNotificationDelete() {
         localStorage.setItem('isDeleteNotificationSent', '1');
         chkNotificationDelete.checked = true;
     }
+}
+
+function initializeSettingsWhenException(exceptionMessage) {
+    chkNotificationAdd.checked      = false;
+    chkNotificationUpdate.checked   = false;
+    chkNotificationDelete.checked   = false;
+    chkOpeningIntroRun.checked      = false;
+
+    chkNotificationAdd.onclick      = function() { switchSettingsWhenException(event, exceptionMessage); }
+    chkNotificationUpdate.onclick   = function() { switchSettingsWhenException(event, exceptionMessage); }
+    chkNotificationDelete.onclick   = function() { switchSettingsWhenException(event, exceptionMessage); }
+    chkOpeningIntroRun.onclick      = function() { switchSettingsWhenException(event, exceptionMessage); }
+}
+
+function switchSettingsWhenException(event, exceptionMessage) {
+    event.preventDefault();
+    sendAlertNotification(`${exceptionMessage}`, 8000);
 }
 /* ------ End Functions Declaration ------*/

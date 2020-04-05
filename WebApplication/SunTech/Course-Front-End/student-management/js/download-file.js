@@ -30,8 +30,7 @@ function downloadDataFile() {
     }
 
     exportDataIntoCsvFile(downloadedStudents);
-    btnDownloadFile.blur();
-    txtKeywordSearch.focus();
+    divSettingBoxContainer.focus();
 }﻿﻿﻿
 
 function exportDataIntoCsvFile(arrayOfStudents) {
