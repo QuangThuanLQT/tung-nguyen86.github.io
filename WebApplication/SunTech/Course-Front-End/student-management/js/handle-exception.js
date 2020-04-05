@@ -16,6 +16,11 @@ function handleExceptionOfLocalStorage() {
     let currentBrowser = getCurrentBrowser().toLowerCase().trim();
 
     if (currentBrowser === 'safari') {
+        alert('using safari');
+        alert('exceptionObject = ', exceptionObject);
+        alert('typeof(exceptionObject) = ', typeof(exceptionObject));
+        alert('exceptionObject.messageForAlertNotification = ', exceptionObject.messageForAlertNotification);
+        alert('exceptionObject.messageForStudentDataTable = ', exceptionObject.messageForStudentDataTable);
         throwExceptionMessagesInSafari(exceptionObject);
     } else if (currentBrowser === 'edge') {
         throwExceptionMessagesInEdge(exceptionObject);

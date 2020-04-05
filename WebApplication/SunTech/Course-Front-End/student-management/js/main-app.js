@@ -49,6 +49,12 @@ function processOnLoadPage() {
         resetFilterSearchForm();
         resetStudentForm(false);
 
+        alert('typeof(exception) = ', typeof(exception));
+        alert('typeof(exception.messageForAlertNotification) = ', typeof(exception.messageForAlertNotification));
+        alert('typeof(exception.messageForStudentDataTable) = ', typeof(exception.messageForStudentDataTable));
+        alert('exception.messageForAlertNotification = ', exception.messageForAlertNotification);
+        alert('exception.messageForStudentDataTable = ', exception.messageForStudentDataTable);
+
         if (typeof(exception.messageForAlertNotification) === 'undefined' || 
             typeof(exception.messageForStudentDataTable) === 'undefined') {
             handleUndefinedException();
