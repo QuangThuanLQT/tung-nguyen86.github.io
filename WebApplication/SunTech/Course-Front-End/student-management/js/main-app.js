@@ -66,7 +66,7 @@ function processOnLoadPage() {
 }
 
 function loadPage() {
-    handleExceptionsForPage();
+    // handleExceptionsForPage();
 
     let isOpeningIntroRunBefore = localStorage.getItem('isOpeningIntroRunBefore');
 
