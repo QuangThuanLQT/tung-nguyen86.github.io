@@ -2,6 +2,10 @@
 /* ------ Start Functions Declaration ------*/
 function handleExceptionsForPage() {
     // Handle exception of localStorage which is not supported by some Browsers in some cases.
+    handleExceptionOfLocalStorage();
+}
+
+function handleExceptionOfLocalStorage() {
     let currentBrowser = getCurrentBrowser().toLowerCase().trim();
     let exceptionObject = {
         messageForAlertNotification : EMPTY_STRING, 
@@ -9,19 +13,15 @@ function handleExceptionsForPage() {
     };
 
     if (typeof(localStorage) === 'undefined') {
-        handleExceptionOfLocalStorage(currentBrowser, exceptionObject);
+        if (currentBrowser === 'edge') {
+            throwExceptionMessagesInEdge(exceptionObject);
+        } else {
+            throwExceptionMessagesInOtherBrowsers(exceptionObject);
+        }
     }
 
-    if (typeof(localStorage) === 'object' && currentBrowser === 'safari on ios') {
+    if (currentBrowser === 'safari on ios' && !isLocalStorageSupportedByBrowser()) {
         throwExceptionMessagesInSafari(exceptionObject);
-    }
-}
-
-function handleExceptionOfLocalStorage(currentBrowser, exceptionObject) {
-    if (currentBrowser === 'edge') {
-        throwExceptionMessagesInEdge(exceptionObject);
-    } else {
-        throwExceptionMessagesInOtherBrowsers(exceptionObject);
     }
 }
 
@@ -57,16 +57,29 @@ function throwExceptionMessagesInOtherBrowsers(exceptionObject) {
 
 function throwExceptionMessagesInSafari(exceptionObject) {
     exceptionObject.messageForAlertNotification = `
-        Chức năng này không khả dụng do Safari trên iOS không hỗ trợ lưu trữ dữ liệu khi chạy ở chế độ thông thường (Public).<br>
-        Bạn vui lòng chuyển Trình duyệt sang chế độ riêng tư (Private) để sử dụng chương trình.
+        Chức năng này không khả dụng do Safari trên phiên bản iOS hiện tại không hỗ trợ lưu trữ dữ liệu khi chạy ở chế độ riêng tư (Private).<br>
+        Bạn vui lòng chuyển Trình duyệt sang chế độ thông thường để sử dụng chương trình.
     `;
 
     exceptionObject.messageForStudentDataTable = `
-        Safari trên iOS không hỗ trợ lưu trữ dữ liệu khi chạy ở chế độ thông thường (Public).<br>
-        Bạn vui lòng chuyển Trình duyệt sang chế độ riêng tư (Private) để sử dụng chương trình.
+        Safari trên phiên bản iOS hiện tại không hỗ trợ lưu trữ dữ liệu khi chạy ở chế độ riêng tư (Private).<br>
+        Bạn vui lòng chuyển Trình duyệt sang chế độ thông thường để sử dụng chương trình.
     `;
 
     throw exceptionObject;
+}
+
+function isLocalStorageSupportedByBrowser() {
+    let storage = window.sessionStorage;
+
+    try {
+        storage.setItem('testKey', 'testValue');
+        storage.removeItem('testKey');
+
+        return true;
+    } catch (exception) {
+        return false;
+    }
 }
 
 function handleUndefinedException(isFunctionCallOnLoadPage = true) {
