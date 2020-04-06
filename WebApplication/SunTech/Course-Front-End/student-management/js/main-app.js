@@ -44,11 +44,13 @@ divResetStudentInfo.onclick = function() { resetStudentForm(); }
 
 function processOnLoadPage() {
     try {
+        handleExceptionsForPage();
         loadPage();
     } catch(exception) {
         resetFilterSearchForm();
         resetStudentForm(false);
 
+        alert('browser = ', getCurrentBrowser().toLowerCase().trim());
         alert('typeof(exception) = ', typeof(exception));
         alert('typeof(exception.messageForAlertNotification) = ', typeof(exception.messageForAlertNotification));
         alert('typeof(exception.messageForStudentDataTable) = ', typeof(exception.messageForStudentDataTable));
@@ -66,7 +68,7 @@ function processOnLoadPage() {
 }
 
 function loadPage() {
-    // handleExceptionsForPage();
+    
 
     let isOpeningIntroRunBefore = localStorage.getItem('isOpeningIntroRunBefore');
 

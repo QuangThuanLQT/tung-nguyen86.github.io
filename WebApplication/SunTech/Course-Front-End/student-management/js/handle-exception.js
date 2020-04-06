@@ -2,6 +2,8 @@
 /* ------ Start Functions Declaration ------*/
 function handleExceptionsForPage() {
     // Handle exception of localStorage which is not supported by some Browsers in some cases.
+    alert('localStorage = ', localStorage);
+    alert('typeof(localStorage) = ', typeof(localStorage));
     if (typeof(localStorage) === 'undefined') {
         alert('handleExceptionsForPage()');
         handleExceptionOfLocalStorage();
