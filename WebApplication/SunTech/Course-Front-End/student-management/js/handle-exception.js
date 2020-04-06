@@ -2,38 +2,35 @@
 /* ------ Start Functions Declaration ------*/
 function handleExceptionsForPage() {
     // Handle exception of localStorage which is not supported by some Browsers in some cases.
-    alert('localStorage = ', localStorage);
-    alert('typeof(localStorage) = ', typeof(localStorage));
     if (typeof(localStorage) === 'undefined') {
-        alert('handleExceptionsForPage()');
+        document.write('handleExceptionsForPage()<br>');
         handleExceptionOfLocalStorage();
     }
 }
 
 function handleExceptionOfLocalStorage() {
-    alert('handleExceptionOfLocalStorage()');
+    document.write('handleExceptionOfLocalStorage()<br>');
     let exceptionObject = {
         messageForAlertNotification : 'abc', 
         messageForStudentDataTable  : 'def'
     };
-    alert('exceptionObject = ', exceptionObject);
-    alert('exceptionObject.messageForAlertNotification = ', exceptionObject.messageForAlertNotification);
-    alert('exceptionObject.messageForStudentDataTable = ', exceptionObject.messageForStudentDataTable);
+    document.write('exceptionObject = ' + exceptionObject + '<br>');
+    document.write('exceptionObject.messageForAlertNotification = ' + exceptionObject.messageForAlertNotification + '<br>');
+    document.write('exceptionObject.messageForStudentDataTable = ' + exceptionObject.messageForStudentDataTable + '<br>');
 
     let currentBrowser = getCurrentBrowser().toLowerCase().trim();
-    alert('currentBrowser = ', currentBrowser);
+    document.write('currentBrowser = ' + currentBrowser + '<br>');
 
     if (currentBrowser === 'safari') {
-        alert('using safari');
-        alert('exceptionObject = ', exceptionObject);
-        alert('typeof(exceptionObject) = ', typeof(exceptionObject));
-        alert('exceptionObject.messageForAlertNotification = ', exceptionObject.messageForAlertNotification);
-        alert('exceptionObject.messageForStudentDataTable = ', exceptionObject.messageForStudentDataTable);
+        document.write('using safari');
+        document.write('exceptionObject = ' + exceptionObject + '<br>');
+        document.write('typeof(exceptionObject) = ' + typeof(exceptionObject) + '<br>');
+        document.write('exceptionObject.messageForAlertNotification = ' + exceptionObject.messageForAlertNotification + '<br>');
+        document.write('exceptionObject.messageForStudentDataTable = ' + exceptionObject.messageForStudentDataTable + '<br>');
         throwExceptionMessagesInSafari(exceptionObject);
     } else if (currentBrowser === 'edge') {
         throwExceptionMessagesInEdge(exceptionObject);
     } else {
-        alert('using another browser');
         throwExceptionMessagesInOtherBrowsers(exceptionObject);
     }
 }
