@@ -48,6 +48,7 @@ function processOnLoadPage() {
     } catch(exception) {
         resetFilterSearchForm();
         resetStudentForm(false);
+        document.write(exception.message);
 
         if (typeof(exception.messageForAlertNotification) === 'undefined' || 
             typeof(exception.messageForStudentDataTable) === 'undefined') {
@@ -63,6 +64,7 @@ function loadPage() {
     // handleExceptionsForPage();
 
     let isOpeningIntroRunBefore = localStorage.getItem('isOpeningIntroRunBefore');
+    document.write('isOpeningIntroRunBefore = ' + isOpeningIntroRunBefore + '<br>');
 
     if (isOpeningIntroRunBefore) {
         if (isOpeningIntroRunBefore === '0') {
@@ -71,6 +73,7 @@ function loadPage() {
         } else {
             if (isOpeningIntroRunBefore !== '1') {
                 localStorage.setItem('isOpeningIntroRunBefore', '1');
+                document.write('localStorage.setItem()');
             }
 
             chkOpeningIntroRun.checked = false;
@@ -78,6 +81,7 @@ function loadPage() {
         }
     } else {
         localStorage.setItem('isOpeningIntroRunBefore', '1');
+        document.write('localStorage.setItem()');
         chkOpeningIntroRun.checked = false;
         loadPageWithOpeningIntro();
     }
