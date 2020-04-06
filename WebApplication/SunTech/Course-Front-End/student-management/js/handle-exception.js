@@ -3,25 +3,21 @@
 function handleExceptionsForPage() {
     // Handle exception of localStorage which is not supported by some Browsers in some cases.
     let currentBrowser = getCurrentBrowser().toLowerCase().trim();
-
-    if (typeof(localStorage) === 'undefined') {
-        handleExceptionOfLocalStorage(currentBrowser);
-    }
-
-    if (typeof(localStorage) === 'object' && currentBrowser === 'safari on ios') {
-        document.write('using safari on ios');
-        throwExceptionMessagesInSafari();
-    }
-}
-
-function handleExceptionOfLocalStorage(currentBrowser) {
-    document.write('handleExceptionOfLocalStorage()<br>');
     let exceptionObject = {
         messageForAlertNotification : EMPTY_STRING, 
         messageForStudentDataTable  : EMPTY_STRING
     };
-    document.write('exceptionObject = ' + exceptionObject + '<br>');
 
+    if (typeof(localStorage) === 'undefined') {
+        handleExceptionOfLocalStorage(currentBrowser, exceptionObject);
+    }
+
+    if (typeof(localStorage) === 'object' && currentBrowser === 'safari on ios') {
+        throwExceptionMessagesInSafari(exceptionObject);
+    }
+}
+
+function handleExceptionOfLocalStorage(currentBrowser, exceptionObject) {
     if (currentBrowser === 'edge') {
         throwExceptionMessagesInEdge(exceptionObject);
     } else {
@@ -59,12 +55,7 @@ function throwExceptionMessagesInOtherBrowsers(exceptionObject) {
     throw exceptionObject;
 }
 
-function throwExceptionMessagesInSafari() {
-    let exceptionObject = {
-        messageForAlertNotification : EMPTY_STRING, 
-        messageForStudentDataTable  : EMPTY_STRING
-    };
-
+function throwExceptionMessagesInSafari(exceptionObject) {
     exceptionObject.messageForAlertNotification = `
         Chức năng này không khả dụng do Safari trên iOS không hỗ trợ lưu trữ dữ liệu khi chạy ở chế độ thông thường (Public).<br>
         Bạn vui lòng chuyển Trình duyệt sang chế độ riêng tư (Private) để sử dụng chương trình.
