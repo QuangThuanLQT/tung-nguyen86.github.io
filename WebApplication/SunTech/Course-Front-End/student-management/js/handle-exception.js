@@ -2,51 +2,31 @@
 /* ------ Start Functions Declaration ------*/
 function handleExceptionsForPage() {
     // Handle exception of localStorage which is not supported by some Browsers in some cases.
+    let currentBrowser = getCurrentBrowser().toLowerCase().trim();
+
     if (typeof(localStorage) === 'undefined') {
-        document.write('handleExceptionsForPage()<br>');
-        handleExceptionOfLocalStorage();
+        handleExceptionOfLocalStorage(currentBrowser);
+    }
+
+    if (typeof(localStorage) === 'object' && currentBrowser === 'safari on ios') {
+        document.write('using safari on ios');
+        throwExceptionMessagesInSafari();
     }
 }
 
-function handleExceptionOfLocalStorage() {
+function handleExceptionOfLocalStorage(currentBrowser) {
     document.write('handleExceptionOfLocalStorage()<br>');
     let exceptionObject = {
-        messageForAlertNotification : 'abc', 
-        messageForStudentDataTable  : 'def'
+        messageForAlertNotification : EMPTY_STRING, 
+        messageForStudentDataTable  : EMPTY_STRING
     };
     document.write('exceptionObject = ' + exceptionObject + '<br>');
-    document.write('exceptionObject.messageForAlertNotification = ' + exceptionObject.messageForAlertNotification + '<br>');
-    document.write('exceptionObject.messageForStudentDataTable = ' + exceptionObject.messageForStudentDataTable + '<br>');
 
-    let currentBrowser = getCurrentBrowser().toLowerCase().trim();
-    document.write('currentBrowser = ' + currentBrowser + '<br>');
-
-    if (currentBrowser === 'safari') {
-        document.write('using safari');
-        document.write('exceptionObject = ' + exceptionObject + '<br>');
-        document.write('typeof(exceptionObject) = ' + typeof(exceptionObject) + '<br>');
-        document.write('exceptionObject.messageForAlertNotification = ' + exceptionObject.messageForAlertNotification + '<br>');
-        document.write('exceptionObject.messageForStudentDataTable = ' + exceptionObject.messageForStudentDataTable + '<br>');
-        throwExceptionMessagesInSafari(exceptionObject);
-    } else if (currentBrowser === 'edge') {
+    if (currentBrowser === 'edge') {
         throwExceptionMessagesInEdge(exceptionObject);
     } else {
         throwExceptionMessagesInOtherBrowsers(exceptionObject);
     }
-}
-
-function throwExceptionMessagesInSafari(exceptionObject) {
-    exceptionObject.messageForAlertNotification = `
-        Chức năng này không khả dụng do Safari ở chế độ thông thường (Public) không hỗ trợ lưu trữ dữ liệu.<br>
-        Bạn vui lòng chuyển Trình duyệt sang chế độ riêng tư (Private) để sử dụng chương trình.
-    `;
-
-    exceptionObject.messageForStudentDataTable = `
-        Safari ở chế độ thông thường (Public) không hỗ trợ lưu trữ dữ liệu (Local Storage).<br>
-        Bạn vui lòng chuyển Trình duyệt sang chế độ riêng tư (Private) để sử dụng chương trình.
-    `;
-
-    throw exceptionObject;
 }
 
 function throwExceptionMessagesInEdge(exceptionObject) {
@@ -74,6 +54,25 @@ function throwExceptionMessagesInOtherBrowsers(exceptionObject) {
     exceptionObject.messageForStudentDataTable = `
         Trình duyệt hiện tại không hỗ trợ lưu trữ dữ liệu (Local Storage).<br>
         Bạn vui lòng chuyển qua Trình duyệt khác như: Chrome, Opera hoặc Firefox để sử dụng chương trình.
+    `;
+
+    throw exceptionObject;
+}
+
+function throwExceptionMessagesInSafari() {
+    let exceptionObject = {
+        messageForAlertNotification : EMPTY_STRING, 
+        messageForStudentDataTable  : EMPTY_STRING
+    };
+
+    exceptionObject.messageForAlertNotification = `
+        Chức năng này không khả dụng do Safari trên iOS không hỗ trợ lưu trữ dữ liệu khi chạy ở chế độ thông thường (Public).<br>
+        Bạn vui lòng chuyển Trình duyệt sang chế độ riêng tư (Private) để sử dụng chương trình.
+    `;
+
+    exceptionObject.messageForStudentDataTable = `
+        Safari trên iOS không hỗ trợ lưu trữ dữ liệu khi chạy ở chế độ thông thường (Public).<br>
+        Bạn vui lòng chuyển Trình duyệt sang chế độ riêng tư (Private) để sử dụng chương trình.
     `;
 
     throw exceptionObject;

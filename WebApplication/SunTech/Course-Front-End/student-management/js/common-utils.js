@@ -265,6 +265,11 @@ function getCurrentBrowser() {
 
     if (isSafari) { return 'Safari'; }
 
+    let userAgent = window.navigator.userAgent;
+    let isSafariOniOS = (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i));
+
+    if (isSafariOniOS) { return 'Safari on iOS'; }
+
     // Detect the Blink Engine
     let isBlink = (isChrome || isOpera) && !!window.CSS;
 
