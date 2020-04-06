@@ -3,17 +3,23 @@
 function handleExceptionsForPage() {
     // Handle exception of localStorage which is not supported by some Browsers in some cases.
     if (typeof(localStorage) === 'undefined') {
+        alert('handleExceptionsForPage()');
         handleExceptionOfLocalStorage();
     }
 }
 
 function handleExceptionOfLocalStorage() {
+    alert('handleExceptionOfLocalStorage()');
     let exceptionObject = {
-        messageForAlertNotification : EMPTY_STRING, 
-        messageForStudentDataTable  : EMPTY_STRING
+        messageForAlertNotification : 'abc', 
+        messageForStudentDataTable  : 'def'
     };
+    alert('exceptionObject = ', exceptionObject);
+    alert('exceptionObject.messageForAlertNotification = ', exceptionObject.messageForAlertNotification);
+    alert('exceptionObject.messageForStudentDataTable = ', exceptionObject.messageForStudentDataTable);
 
     let currentBrowser = getCurrentBrowser().toLowerCase().trim();
+    alert('currentBrowser = ', currentBrowser);
 
     if (currentBrowser === 'safari') {
         alert('using safari');
@@ -25,6 +31,7 @@ function handleExceptionOfLocalStorage() {
     } else if (currentBrowser === 'edge') {
         throwExceptionMessagesInEdge(exceptionObject);
     } else {
+        alert('using another browser');
         throwExceptionMessagesInOtherBrowsers(exceptionObject);
     }
 }
