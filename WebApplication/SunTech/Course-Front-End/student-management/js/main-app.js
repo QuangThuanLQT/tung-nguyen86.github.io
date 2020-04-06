@@ -60,7 +60,7 @@ function processOnLoadPage() {
 }
 
 function loadPage() {
-    // handleExceptionsForPage();
+    handleExceptionsForPage();
 
     let isOpeningIntroRunBefore = localStorage.getItem('isOpeningIntroRunBefore');
 
@@ -121,7 +121,7 @@ function processOnSaveStudentInfo() {
 }
 
 function saveStudentInfo() {
-    // handleExceptionsForPage();
+    handleExceptionsForPage();
 
     let fullName        = txtFullName.value.trim();
     let emailAddress    = txtEmailAddress.value.trim();

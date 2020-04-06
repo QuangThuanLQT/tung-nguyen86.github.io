@@ -57,12 +57,12 @@ function throwExceptionMessagesInOtherBrowsers(exceptionObject) {
 
 function throwExceptionMessagesInSafari(exceptionObject) {
     exceptionObject.messageForAlertNotification = `
-        Chức năng này không khả dụng do Safari trên phiên bản iOS hiện tại không hỗ trợ lưu trữ dữ liệu khi chạy ở chế độ riêng tư (Private).<br>
+        Chức năng này không khả dụng do Safari trên iOS hiện tại không hỗ trợ lưu trữ dữ liệu khi chạy ở chế độ riêng tư (Private).<br>
         Bạn vui lòng chuyển Trình duyệt sang chế độ thông thường để sử dụng chương trình.
     `;
 
     exceptionObject.messageForStudentDataTable = `
-        Safari trên phiên bản iOS hiện tại không hỗ trợ lưu trữ dữ liệu khi chạy ở chế độ riêng tư (Private).<br>
+        Safari trên iOS hiện tại không hỗ trợ lưu trữ dữ liệu khi chạy ở chế độ riêng tư (Private).<br>
         Bạn vui lòng chuyển Trình duyệt sang chế độ thông thường để sử dụng chương trình.
     `;
 

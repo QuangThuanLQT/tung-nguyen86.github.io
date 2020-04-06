@@ -216,7 +216,7 @@ div.list-student table tr.no-data-found {
 }
 
 div.list-student table tr.error-info {
-    height: 50px;
+    height: 100%;
     background-color: #eeeeee;
     color: #ff0000;
     font-size: 13.5px;
@@ -307,4 +307,9 @@ div.list-student table tr td.col-email {
 div.list-student table tr td:last-child {
     border-right: none;
     cursor: initial;
+}
+
+div.list-student table tr.error-info td {
+    line-height: 1.6;
+    padding: 12px 0px;
 }
