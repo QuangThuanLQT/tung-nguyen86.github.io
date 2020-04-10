@@ -18,13 +18,17 @@ function checkDataIntegrityBeforeChange(actionType, studentObject) {
 }
 
 function isDataChangedBeforeAdd(actionType) {
-    return isLengthOfStudentInfoListChanged(actionType);
+    return (
+        isLengthOfStudentInfoListChanged(actionType) || 
+        isDataOfStudentInfoListChanged(actionType)
+    );
 }
 
 function isDataChangedBeforeUpdateOrDelete(actionType, studentObject) {
     return (
         isCurrentStudentIdNotExisted(studentObject) || 
         isLengthOfStudentInfoListChanged(actionType) || 
+        isDataOfStudentInfoListChanged(actionType) || 
         isDataOfCurrentStudentChanged(actionType, studentObject)
     );
 }
@@ -36,6 +40,25 @@ function isLengthOfStudentInfoListChanged(actionType) {
     } else {
         return false;
     }
+}
+
+function isDataOfStudentInfoListChanged(actionType) {
+    let studentInfoList = localStorage.getItem('students');
+
+    if (studentInfoList && studentInfoList != '[]') {
+        let studentsInLocalStorage = JSON.parse(studentInfoList.trim());
+
+        for (let i = 0; i < students.length; i++) {
+            if (!isEqualObject(studentsInLocalStorage[i], students[i])) {
+                showAlertWhenDataOfListChanged(actionType);
+                return true;
+            } else {
+                continue;
+            }
+        }
+    }
+
+    return false;
 }
 
 function isCurrentStudentIdNotExisted(studentObject) {
@@ -77,6 +100,14 @@ function isDataOfCurrentStudentChanged(actionType, studentObject) {
 }
 
 function showAlertWhenLengthOfListChanged(actionType) {
+    showAlertWhenStudentInfoListChanged(actionType);
+}
+
+function showAlertWhenDataOfListChanged(actionType) {
+    showAlertWhenStudentInfoListChanged(actionType);
+}
+
+function showAlertWhenStudentInfoListChanged(actionType) {
     let textValueOfAction = getTextValueOfAction(actionType);
 
     alertBeforeChange(
@@ -144,8 +175,9 @@ function synchronizeData(isLengthOfListChanged, isStudentIdNotExisted = false, s
         setTimeout(function() {
             displayStudentInfoList();
 
-            if (isStudentIdNotExisted) {
-                resetStudentForm(false);
+            if (findIndexOfItemByIdInArray(students, currentStudentId) === MINUS_ONE_NUMBER) {
+                btnSaveStudentInfo.value     = ACTION_ADD_STUDENT;
+                btnSaveStudentInfo.innerText = 'Thêm mới';
             }
         }, 3200);
 
