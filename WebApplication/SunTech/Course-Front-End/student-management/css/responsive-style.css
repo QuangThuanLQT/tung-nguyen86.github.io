@@ -21,8 +21,13 @@
         width: 100%;
     }
 
+    div#winAlertBeforeChange, 
     div#winConfirmBeforeChange {
         left: calc(50% + 16px);
+    }
+
+    div#winProcessBeforeChange {
+        left: calc(48% + 9px);
     }
 }
 
@@ -53,8 +58,22 @@
         padding: 3px 6px;
     }
 
+    div#winAlertBeforeChange {
+        top: calc(46% + 11px);
+        left: 50%;
+    }
+
     div#winConfirmBeforeChange {
-        top: calc(45% + 13px);
+        top: calc(45% + 11px);
+        left: 50%;
+    }
+
+    div#winConfirmBeforeChange.import-students {
+        top: calc(46% + 11px);
+    }
+
+    div#winProcessBeforeChange {
+        top: calc(43% + 9px);
         left: 50%;
     }
 }
@@ -71,8 +90,20 @@
         bottom: 22px;
     }
 
+    div#winAlertBeforeChange {
+        top: calc(32% + 9px);
+    }
+
     div#winConfirmBeforeChange {
         top: calc(31% + 12px);
+    }
+
+    div#winConfirmBeforeChange.import-students {
+        top: calc(32% + 9px);
+    }
+
+    div#winProcessBeforeChange {
+        top: calc(30% + 4px);
     }
 }
 
@@ -109,8 +140,20 @@
         right: 16px;
     }
 
+    div#winAlertBeforeChange {
+        top: calc(42% + 15px);
+    }
+
     div#winConfirmBeforeChange {
         top: calc(41% + 15px);
+    }
+
+    div#winConfirmBeforeChange.import-students {
+        top: calc(42% + 15px);
+    }
+
+    div#winProcessBeforeChange {
+        top: calc(39% + 15px);
     }
 }
 
@@ -409,7 +452,9 @@
         margin-top: -4px;
     }
 
-    div#winConfirmBeforeChange {
+    div#winAlertBeforeChange, 
+    div#winConfirmBeforeChange, 
+    div#winProcessBeforeChange {
         width: 94%;
     }
 }
@@ -489,8 +534,17 @@
         top: 45%;
     }
 
+    div#winAlertBeforeChange, 
     div#winConfirmBeforeChange {
         top: calc(48% + 10px);
+    }
+
+    div#winConfirmBeforeChange.import-students {
+        top: calc(49% + 10px);
+    }
+
+    div#winProcessBeforeChange {
+        top: calc(45% + 10px);
     }
 }
 
@@ -577,7 +631,7 @@
     }
 
     div.setting-gender select#selGender {
-        padding-left: 34%;
+        padding-left: 32%;
     }
 
     div#boxFilterSearch div.setting-filter-search button#btnFilterSearch {
@@ -590,6 +644,27 @@
         float: none;
         display: block;
         width: 100%;
+    }
+
+    div#boxImportSampleData div.import-setting-box-container {
+        padding: 5px 0px 10px;
+    }
+
+    div#boxImportSampleData div.import-setting-box-container button#btnImportSampleData {
+        display: block;
+        width: 100%;
+    }
+
+    div#boxImportSampleData div.import-setting-box-container button#btnImportSampleData span.down-arrow {
+        margin-left: 20px;
+    }
+
+    div#boxImportSampleData div.import-setting-box-container div.import-setting-box {
+        width: 100%;
+    }
+
+    div#boxImportSampleData div.import-setting-box-container div.import-setting-box ul li {
+        font-size: 12.5px;
     }
 
     div#boxNotification div.setting-notification label {
@@ -676,8 +751,17 @@
         margin-bottom: 20px;
     }
 
+    div#winAlertBeforeChange, 
     div#winConfirmBeforeChange {
         top: calc(53% + 5px);
+    }
+
+    div#winConfirmBeforeChange.import-students {
+        top: calc(55% + 5px);
+    }
+
+    div#winProcessBeforeChange {
+        top: calc(50% + 5px);
     }
 }
 
@@ -757,6 +841,10 @@
 
     div.setting-gender select#selGender {
         padding-left: 15px;
+    }
+
+    div#boxImportSampleData div.import-setting-box-container button#btnImportSampleData span.down-arrow {
+        margin-left: 15px;
     }
 
     div#boxNotification div.setting-notification label {
@@ -842,24 +930,45 @@
         font-size: 12.5px;
     }
 
+    div#winAlertBeforeChange {
+        top: calc(61% + 10px);
+    }
+
     div#winConfirmBeforeChange {
         top: calc(60% + 10px);
     }
 
+    div#winConfirmBeforeChange.import-students {
+        top: calc(63% + 10px);
+    }
+
+    div#winAlertBeforeChange div.header-area div.left-item, 
     div#winConfirmBeforeChange div.header-area div.left-item {
         font-size: 12px;
     }
 
+    div#winAlertBeforeChange div.header-area div.right-item, 
     div#winConfirmBeforeChange div.header-area div.right-item {
         font-size: 22px;
     }
 
-    div#winConfirmBeforeChange div.main-area div.content {
+    div#winAlertBeforeChange div.main-area div.content {
+        padding: 12px 8px 12px 12px;
+    }
+
+    div#winAlertBeforeChange div.main-area div.content, 
+    div#winConfirmBeforeChange div.main-area div.content, 
+    div#winProcessBeforeChange div.main-area div.content {
         font-size: 12px;
     }
 
+    div#winAlertBeforeChange div.main-area div.action button, 
     div#winConfirmBeforeChange div.main-area div.action button {
         font-size: 13px;
         padding: 3px 12px;
+    }
+
+    div#winProcessBeforeChange {
+        top: calc(57% + 12px);
     }
 }

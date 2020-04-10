@@ -13,7 +13,6 @@ function filterSearch() {
             Bạn vui lòng nhập liệu trước khi thực hiện Tìm kiếm và Lọc.
         `, 4000);
 
-        setTimeout(function() { txtFullName.focus(); }, 2000);
         return;
     }
 

@@ -66,6 +66,16 @@ function standardizePhoneNumber(phoneNumber) {
     return phoneNumber;
 }
 
+function setStringForNumberValue(valueOfNumber) {
+    if (valueOfNumber < 0) {
+        return 'Invalid Value Of Number';
+    } else if (valueOfNumber >= 0 && valueOfNumber < 10) {
+        return ('0' + valueOfNumber.toString());
+    } else {
+        return valueOfNumber.toString();
+    }
+}
+
 function setStringForOrderNumber(orderNumber, objectTotal) {
     if (orderNumber < 1) {
         return 'Invalid Order Number !!!';
@@ -76,6 +86,16 @@ function setStringForOrderNumber(orderNumber, objectTotal) {
     } else {
         return padLeftByZeroForNumber(orderNumber, findNearestPowerOfTen(objectTotal));
     }
+}
+
+function padLeftByZeroForNumber(integerNumber, length) {
+    let resultString = integerNumber.toString().trim();
+
+    while (resultString.length < length) {
+        resultString = '0' + resultString;
+    }
+
+    return resultString;
 }
 
 /**
@@ -101,16 +121,6 @@ function findNearestPowerOfTen(integerNumber) {
     }
 
     return nearestPowerOfTen;
-}
-
-function padLeftByZeroForNumber(integerNumber, length) {
-    let resultString = integerNumber.toString().trim();
-
-    while (resultString.length < length) {
-        resultString = '0' + resultString;
-    }
-
-    return resultString;
 }
 
 function setBgColorOfFocusedTableRow(sourceElementObject, sourceElementType) {

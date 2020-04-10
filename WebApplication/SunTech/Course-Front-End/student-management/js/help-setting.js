@@ -25,6 +25,7 @@ var isWindowIntroduceProductCreated = false;
 
 /* ------ Start Functions Declaration ------*/
 window.onkeydown                    = function() { processOnKeyDownPage(event); }
+
 divHelpSettingIcon.onclick          = function() { processHelpSettingBox(); }
 litResetFilterSearchForm.onclick    = function() { refreshFilterSearchForm(); }
 litResetWindowPosition.onclick      = function() { resetDefaultPositionOfWindow(); }
@@ -35,6 +36,11 @@ litIntroduceProduct.onclick         = function() { processWindowIntroduceProduct
 function processOnKeyDownPage(event) {
     // Handle when end-user press Escape key on the keyboard.
     if (event.keyCode === 27) {
+        if (boxAlertContainer.className.toLowerCase().indexOf('hidden-overlay') === -1) {
+            alertCancel(currentActiveElement, function() {});
+            return;
+        }
+
         if (boxConfirmContainer.className.toLowerCase().indexOf('hidden-overlay') === -1) {
             confirmCancel(currentActiveElement, function() {});
             return;
@@ -47,6 +53,11 @@ function processOnKeyDownPage(event) {
 
         if (divHelpSettingIcon.className.toLowerCase() === 'focused-menu') {
             hideHelpSettingBox();
+            return;
+        }
+
+        if (divImportSettingBox.className.toLowerCase().indexOf('hidden') === -1) {
+            hideImportSettingBox();
             return;
         }
 
@@ -65,6 +76,10 @@ function processOnKeyDownPage(event) {
 
         if (divHelpSettingIcon.className.toLowerCase() !== 'focused-menu') {
             showHelpSettingBox();
+
+            if (divImportSettingBox.className.toLowerCase().indexOf('hidden') === -1) {
+                hideImportSettingBox();
+            }
             return;
         }
     }
@@ -73,6 +88,10 @@ function processOnKeyDownPage(event) {
 function processHelpSettingBox() {
     if (divHelpSettingIcon.className.toLowerCase() !== 'focused-menu') {
         showHelpSettingBox();
+
+        if (divImportSettingBox.className.toLowerCase().indexOf('hidden') === -1) {
+            hideImportSettingBox();
+        }
     } else {
         hideHelpSettingBox();
     }
@@ -111,7 +130,7 @@ function hideHelpSettingBox() {
         setTimeout(function() {
             divHelpSettingBox.classList.toggle('hidden-help-setting-box-2');
             divHelpSettingIcon.classList.remove('focused-menu');
-        }, 650);
+        }, 500);
     }
 }
 

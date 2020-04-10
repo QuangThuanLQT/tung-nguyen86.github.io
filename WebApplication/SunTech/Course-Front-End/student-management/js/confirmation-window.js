@@ -5,10 +5,10 @@ var winConfirmBeforeChange  = document.getElementById('winConfirmBeforeChange');
 /* ------ End Global Variables Declaration ------*/
 
 /* ------ Start Functions Declaration ------*/
-function confirmBeforeChange(title, content, focusedElementBeforeConfirm, callbackConfirmation) {
+function confirmBeforeChange(title, content, focusedElementBeforeConfirm, callbackConfirmation, referenceFileName = EMPTY_STRING) {
     createContentOfConfirmationWindow(title, content);
     addFeaturesForConfirmationWindow(winConfirmBeforeChange, focusedElementBeforeConfirm, callbackConfirmation);
-    showConfirmationWindow();
+    showConfirmationWindow(referenceFileName);
 
     let btnConfirmOk            = document.getElementById('btnConfirmOk');
     btnConfirmOk.onclick        = function() { confirmOk(focusedElementBeforeConfirm, callbackConfirmation); }
@@ -68,11 +68,11 @@ function moveConfirmationWindow(divConfirmationWindow) {
         startCoordinateX        = event.clientX;
         startCoordinateY        = event.clientY;
 
-        document.onmousemove    = moveConfirmationWindow;
+        document.onmousemove    = moveDivConfirmationWindow;
         document.onmouseup      = stopMovingConfirmationWindow;
     }
 
-    function moveConfirmationWindow(event) {
+    function moveDivConfirmationWindow(event) {
         event = event || window.event;
 
         currentCoordinateX      = startCoordinateX - event.clientX;
@@ -91,7 +91,7 @@ function moveConfirmationWindow(divConfirmationWindow) {
     }
 }
 
-function showConfirmationWindow() {
+function showConfirmationWindow(referenceFileName) {
     let scrollbarWidth = getVerticalScrollbarWidthOfPage();
 
     if (scrollbarWidth > 0) {
@@ -106,6 +106,10 @@ function showConfirmationWindow() {
     winConfirmBeforeChange.classList.remove('hidden-window');
     winConfirmBeforeChange.classList.remove('hidden-window-2');
     winConfirmBeforeChange.classList.add('visible-window');
+
+    if (referenceFileName && referenceFileName.trim() !== EMPTY_STRING) {
+        winConfirmBeforeChange.classList.add(`${referenceFileName}`);
+    }
 }
 
 function confirmOk(focusedElementBeforeConfirm, callbackConfirmation) {

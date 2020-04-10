@@ -150,13 +150,13 @@ function sendDeleteNotification(studentFullName) {
     }, 3500);
 }
 
-function sendAlertNotification(alertMessage, displayTime = 3500) {
+function sendAlertNotification(alertMessage, displayTime = 3500, backgroundColor = '#e08119') {
     clearTimeout(timeoutAlertNotification);
     clearTimeout(timeoutRemoveAlertNotifications);
     clearTimeout(timeoutCollapseAlertNotification);
     clearTimeout(timeoutRemoveLastAlertNotification);
 
-    divAlertNotificationList.innerHTML += `<div class="notification">${alertMessage}</div>`;
+    divAlertNotificationList.innerHTML += `<div style="background-color: ${backgroundColor};" class="notification">${alertMessage}</div>`;
 
     let divNotifications = document.querySelectorAll('div#divAlertNotificationList div.notification');
     divAlertNotification = divNotifications[divNotifications.length - 1];

@@ -216,33 +216,35 @@ function setEffectForStudentForm(isValidStudent) {
 
 function addStudent(student) {
     if (student && errorDetails.length === 0) {
-        currentActiveElement = document.activeElement;
+        if (checkDataIntegrityBeforeChange(ACTION_ADD_STUDENT, student)) {
+            currentActiveElement = document.activeElement;
 
-        confirmBeforeChange(
-            'Hộp thoại xác nhận Thêm', 
-            `Bạn chắc chắn muốn thêm sinh viên<br>${student.fullName} vào Danh sách ?`, 
-            currentActiveElement, 
-            function(isConfirmationOk) {
-                if (isConfirmationOk) {
-                    let newPhoneNumber = standardizePhoneNumber(student.phoneNumber);
-                    txtPhoneNumber.value = newPhoneNumber;
-                    student.phoneNumber = newPhoneNumber;
+            confirmBeforeChange(
+                'Hộp thoại xác nhận Thêm', 
+                `Bạn chắc chắn muốn thêm sinh viên<br>${student.fullName} vào Danh sách ?`, 
+                currentActiveElement, 
+                function(isConfirmationOk) {
+                    if (isConfirmationOk) {
+                        let newPhoneNumber = standardizePhoneNumber(student.phoneNumber);
+                        txtPhoneNumber.value = newPhoneNumber;
+                        student.phoneNumber = newPhoneNumber;
 
-                    students.unshift(student);
-                    localStorage.setItem('students', JSON.stringify(students));
+                        students.unshift(student);
+                        localStorage.setItem('students', JSON.stringify(students));
 
-                    setGlobalStudentId((parseInt(student.id) + 1).toString());
-                    displayStudentInfoListAfterSaving(student.id, ACTION_ADD_STUDENT);
+                        setGlobalStudentId((parseInt(student.id) + 1).toString());
+                        displayStudentInfoListAfterSaving(student.id, ACTION_ADD_STUDENT);
 
-                    let addingTableRow = document.querySelector('div.list-student table tr:not(#first-row)');
-                    setTimeout(function() { addingTableRow.classList.add('added-row'); }, 10);
+                        let addingTableRow = document.querySelector('div.list-student table tr:not(#first-row)');
+                        setTimeout(function() { addingTableRow.classList.add('added-row'); }, 10);
 
-                    if (chkNotificationAdd.checked === true) {
-                        setTimeout(function() { sendNotification(ACTION_ADD_STUDENT, student.fullName); }, 700);
+                        if (chkNotificationAdd.checked === true) {
+                            setTimeout(function() { sendNotification(ACTION_ADD_STUDENT, student.fullName); }, 700);
+                        }
                     }
                 }
-            }
-        );
+            );
+        }
     } else {
         return;
     }
@@ -250,95 +252,101 @@ function addStudent(student) {
 
 function updateStudent(student) {
     if (student && errorDetails.length === 0 && currentStudentId !== MINUS_ONE_NUMBER) {
-        currentActiveElement = document.activeElement;
+        let index = findIndexOfItemByIdInArray(students, currentStudentId);
 
-        confirmBeforeChange(
-            'Hộp thoại xác nhận Sửa', 
-            `Bạn chắc chắn muốn cập nhật Thông tin sinh viên<br>${student.fullName} trong Danh sách ?`, 
-            currentActiveElement, 
-            function(isConfirmationOk) {
-                if (isConfirmationOk) {
-                    let newPhoneNumber = standardizePhoneNumber(student.phoneNumber);
+        if (checkDataIntegrityBeforeChange(ACTION_UPDATE_STUDENT, students[index])) {
+            currentActiveElement = document.activeElement;
 
-                    txtPhoneNumber.value = newPhoneNumber;
-                    student.phoneNumber = newPhoneNumber;
+            confirmBeforeChange(
+                'Hộp thoại xác nhận Sửa', 
+                `Bạn chắc chắn muốn cập nhật Thông tin sinh viên<br>${student.fullName} trong Danh sách ?`, 
+                currentActiveElement, 
+                function(isConfirmationOk) {
+                    if (isConfirmationOk) {
+                        let newPhoneNumber = standardizePhoneNumber(student.phoneNumber);
 
-                    let index = findIndexOfItemByIdInArray(students, currentStudentId);
-                    students[index] = student;
-                    localStorage.setItem('students', JSON.stringify(students));
+                        txtPhoneNumber.value = newPhoneNumber;
+                        student.phoneNumber = newPhoneNumber;
 
-                    displayStudentInfoListAfterSaving(currentStudentId, ACTION_UPDATE_STUDENT);
+                        students[index] = student;
+                        localStorage.setItem('students', JSON.stringify(students));
 
-                    if (currentTableRowIndex >= 0) {
-                        setBgColorOfCurrentTableRow(currentTableRowIndex, ACTION_UPDATE_STUDENT);
-                        currentLocationFromTop = getLocationFromTopOfTableRow(currentTableRowIndex);
-                    }
+                        displayStudentInfoListAfterSaving(currentStudentId, ACTION_UPDATE_STUDENT);
 
-                    setTimeout(function() { scrollBackToFocusedTableRow(); }, 400);
+                        if (currentTableRowIndex >= 0) {
+                            setBgColorOfCurrentTableRow(currentTableRowIndex, ACTION_UPDATE_STUDENT);
+                            currentLocationFromTop = getLocationFromTopOfTableRow(currentTableRowIndex);
+                        }
 
-                    if (chkNotificationUpdate.checked === true) {
-                        setTimeout(function() { sendNotification(ACTION_UPDATE_STUDENT, student.fullName); }, 1000);
+                        setTimeout(function() { scrollBackToFocusedTableRow(); }, 400);
+
+                        if (chkNotificationUpdate.checked === true) {
+                            setTimeout(function() { sendNotification(ACTION_UPDATE_STUDENT, student.fullName); }, 1000);
+                        }
                     }
                 }
-            }
-        );
+            );
+        }
     } else {
         return;
     }
 }
 
 function deleteStudent(studentId, sourceElementObject, sourceElementType) {
-    let index            = findIndexOfItemByIdInArray(students, studentId);
-    let fullName         = students[index].fullName;
-    currentActiveElement = document.activeElement;
+    let index    = findIndexOfItemByIdInArray(students, studentId);
+    let fullName = students[index].fullName;
 
-    confirmBeforeChange(
-        'Hộp thoại xác nhận Xóa', 
-        `Bạn chắc chắn muốn xóa sinh viên<br>${fullName} khỏi Danh sách ?`, 
-        currentActiveElement, 
-        function(isConfirmationOk) {
-            if (isConfirmationOk) {
-                students.splice(index, 1);
-                localStorage.setItem('students', JSON.stringify(students));
+    if (checkDataIntegrityBeforeChange(ACTION_DELETE_STUDENT, students[index])) {
+        currentActiveElement = document.activeElement;
 
-                sourceElementType = sourceElementType.toLowerCase().trim();
-                let deletingTableRow;
+        confirmBeforeChange(
+            'Hộp thoại xác nhận Xóa', 
+            `Bạn chắc chắn muốn xóa sinh viên<br>${fullName} khỏi Danh sách ?`, 
+            currentActiveElement, 
+            function(isConfirmationOk) {
+                if (isConfirmationOk) {
+                    students.splice(index, 1);
+                    localStorage.setItem('students', JSON.stringify(students));
 
-                if (sourceElementType === 'table-row' || sourceElementType === 'row') {
-                    deletingTableRow = sourceElementObject;
-                } else if (sourceElementType === 'link-tag' || sourceElementType === 'link') {
-                    deletingTableRow = sourceElementObject.parentNode.parentNode.parentNode;
-                } else {
-                    return;
-                }
+                    sourceElementType = sourceElementType.toLowerCase().trim();
+                    let deletingTableRow;
 
-                if (deletingTableRow) {
-                    deletingTableRow.classList.remove('added-row');
-                    deletingTableRow.classList.add('deleted-row');
-
-                    if (chkNotificationDelete.checked === true) {
-                        setTimeout(function() { sendNotification(ACTION_DELETE_STUDENT, fullName); }, 450);
+                    if (sourceElementType === 'table-row' || sourceElementType === 'row') {
+                        deletingTableRow = sourceElementObject;
+                    } else if (sourceElementType === 'link-tag' || sourceElementType === 'link') {
+                        deletingTableRow = sourceElementObject.parentNode.parentNode.parentNode;
+                    } else {
+                        return;
                     }
 
-                    setTimeout(function() {
-                        displayStudentInfoList();
+                    if (deletingTableRow) {
+                        deletingTableRow.classList.remove('added-row');
+                        deletingTableRow.classList.add('deleted-row');
 
-                        if (studentId === currentStudentId) {
-                            resetStudentForm(false);
-                        } else {
-                            if (studentId > currentStudentId) {
-                                currentTableRowIndex--;
-                            }
-
-                            if (currentTableRowIndex >= 0) {
-                                setBgColorOfCurrentTableRow(currentTableRowIndex);
-                            }
+                        if (chkNotificationDelete.checked === true) {
+                            setTimeout(function() { sendNotification(ACTION_DELETE_STUDENT, fullName); }, 450);
                         }
-                    }, 500);
+
+                        setTimeout(function() {
+                            displayStudentInfoList();
+
+                            if (studentId === currentStudentId) {
+                                resetStudentForm(false);
+                            } else {
+                                if (studentId > currentStudentId) {
+                                    currentTableRowIndex--;
+                                }
+
+                                if (currentTableRowIndex >= 0) {
+                                    setBgColorOfCurrentTableRow(currentTableRowIndex);
+                                }
+                            }
+                        }, 500);
+                    }
                 }
             }
-        }
-    );
+        );
+    }
 }
 
 function getStudentById(arrayOfStudents, studentId) {

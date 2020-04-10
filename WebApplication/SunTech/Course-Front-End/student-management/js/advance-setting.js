@@ -17,11 +17,10 @@ var isCtrlKeyPressed            = false;
 
 /* ------ Start Functions Declaration ------*/
 divAdvanceSettingIcon.onclick   = function() { processAdvanceSettingBox(); }
-
 txtKeywordSearch.onkeypress     = function() { processOnKeyPressForKeywordSearch(event); }
 txtKeywordSearch.onkeyup        = function() { processOnKeyUpForKeywordSearch(event); }
 txtKeywordSearch.onkeydown      = function() { processOnKeyDownForKeywordSearch(event); }
-btnClearText.onclick            = function() { clearTextOfKeywordSearch(); }
+btnClearText.onclick            = function() { clearTextOfKeywordSearch(true); }
 
 chkNotificationAdd.onclick      = function() { switchNotificationAdd(); }
 chkNotificationUpdate.onclick   = function() { switchNotificationUpdate(); }
@@ -110,9 +109,11 @@ function processDisplayOfClearTextButton(inputTextLength, buttonClassName) {
     }
 }
 
-function clearTextOfKeywordSearch() {
+function clearTextOfKeywordSearch(isFilterSearchFormFocused = false) {
     txtKeywordSearch.value = EMPTY_STRING;
-    txtKeywordSearch.focus();
+    if (isFilterSearchFormFocused) {
+        txtKeywordSearch.focus();
+    }
 
     btnClearText.classList.remove('visible-button');
     btnClearText.classList.toggle('hidden-button');

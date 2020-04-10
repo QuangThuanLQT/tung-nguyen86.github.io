@@ -11,7 +11,9 @@
     <link rel="stylesheet" type="text/css" href="./css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="./css/main-style.css">
     <link rel="stylesheet" type="text/css" href="./css/opening-intro-style.css">
+    <link rel="stylesheet" type="text/css" href="./css/alert-window-style.css">
     <link rel="stylesheet" type="text/css" href="./css/confirmation-window-style.css">
+    <link rel="stylesheet" type="text/css" href="./css/processing-window-style.css">
     <link rel="stylesheet" type="text/css" href="./css/minimize-form-style.css">
     <link rel="stylesheet" type="text/css" href="./css/advance-setting-style.css">
     <link rel="stylesheet" type="text/css" href="./css/help-setting-style.css">
@@ -20,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href="./css/switch-notification-style.css">
     <link rel="stylesheet" type="text/css" href="./css/notification-style.css">
     <link rel="stylesheet" type="text/css" href="./css/auto-scroll-style.css">
-    <link rel="stylesheet" type="text/css" href="./css/change-students-style.css">
+    <link rel="stylesheet" type="text/css" href="./css/import-students-style.css">
     <link rel="stylesheet" type="text/css" href="./css/responsive-style.css">
 </head>
 <body>
@@ -72,7 +74,6 @@
                     <div class="menu-bar-item-3"></div>
                 </div>
 
-                <!-- <div class="setting-box-container visible-setting-box-container" tabindex="-1"> -->
                 <div class="setting-box-container hidden-setting-box-container-2" tabindex="-1">
                     <div class="setting-box-header"></div>
 
@@ -86,7 +87,6 @@
                         <div class="outer-angle-up-area hidden-angle-up-area"></div>
                         <div class="inner-angle-up-area hidden-angle-up-area"></div>
 
-                        <!-- <div class="help-setting-box visible-help-setting-box"> -->
                         <div class="help-setting-box hidden-help-setting-box-2">
                             <ul>
                                 <li id="litResetFilterSearchForm">
@@ -152,6 +152,45 @@
                                 </button>
                             </div>
                         </form>
+                    </div>
+
+                    <div class="setting-box" id="boxImportSampleData">
+                        <div class="import-setting-box-container">
+                            <button type="button" id="btnImportSampleData">
+                                <i class="fa fa-cogs" aria-hidden="true"></i>
+                                Cài đặt dữ liệu mẫu
+                                <span class="down-arrow"></span>
+                            </button>
+                            <div class="import-setting-box hidden-import-setting-box-2">
+                                <ul>
+                                    <li id="litImportThreeNewStudents">
+                                        <a href="javascript:void(0);">
+                                            Danh sách 03 sinh viên mới
+                                        </a>
+                                    </li>
+                                    <li id="litImportFiveNewStudents">
+                                        <a href="javascript:void(0);">
+                                            Danh sách 05 sinh viên mới
+                                        </a>
+                                    </li>
+                                    <li id="litImportTenNewStudents">
+                                        <a href="javascript:void(0);">
+                                            Danh sách 10 sinh viên mới
+                                        </a>
+                                    </li>
+                                    <li id="litImportFifteenNewStudents">
+                                        <a href="javascript:void(0);">
+                                            Danh sách 15 sinh viên mới
+                                        </a>
+                                    </li>
+                                    <li id="litImportTwentyNewStudents">
+                                        <a href="javascript:void(0);">
+                                            Danh sách 20 sinh viên mới
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="setting-box" id="boxNotification">
@@ -221,8 +260,16 @@
         </div>
     </div>
 
+    <div id="boxAlertContainer" class="hidden-overlay" tabindex="0">
+        <div id="winAlertBeforeChange" class="hidden-window hidden-window-2" tabindex="0"></div>
+    </div>
+
     <div id="boxConfirmContainer" class="hidden-overlay" tabindex="0">
         <div id="winConfirmBeforeChange" class="hidden-window hidden-window-2" tabindex="0"></div>
+    </div>
+
+    <div id="boxProcessContainer" class="hidden-overlay" tabindex="0">
+        <div id="winProcessBeforeChange" class="hidden-window hidden-window-2" tabindex="0"></div>
     </div>
 
     <div id="divAddNotificationList"></div>
@@ -232,7 +279,10 @@
 
     <script src="./js/main-app.js"></script>
     <script src="./js/opening-intro.js"></script>
+    <script src="./js/synchronize-data.js"></script>
+    <script src="./js/alert-window.js"></script>
     <script src="./js/confirmation-window.js"></script>
+    <script src="./js/processing-window.js"></script>
     <script src="./js/validate-form.js"></script>
     <script src="./js/common-utils.js"></script>
     <script src="./js/minimize-form.js"></script>
@@ -244,7 +294,7 @@
     <script src="./js/auto-scroll.js"></script>
     <script src="./js/filter-search.js"></script>
     <script src="./js/download-file.js"></script>
-    <script src="./js/change-students.js"></script>
+    <script src="./js/import-students.js"></script>
     <script src="./js/handle-exception.js"></script>
 </body>
 </html>

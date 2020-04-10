@@ -1,5 +1,5 @@
 
-div#boxConfirmContainer {
+div#boxAlertContainer {
     position: fixed;
     z-index: 2000;
     top: 0px;
@@ -10,21 +10,21 @@ div#boxConfirmContainer {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-div#boxConfirmContainer.visible-overlay {
+div#boxAlertContainer.visible-overlay {
     opacity: 1;
     visibility: visible;
     transition: opacity 0.35s, visibility 0.35s ease;
 }
 
-div#boxConfirmContainer.hidden-overlay {
+div#boxAlertContainer.hidden-overlay {
     opacity: 0;
     visibility: hidden;
-    transition: opacity 1s, visibility 0.8s ease;
+    transition: opacity 0.6s, visibility 0.5s ease;
 }
 
-div#winConfirmBeforeChange {
+div#winAlertBeforeChange {
     position: relative;
-    top: calc(9% + 12px);
+    top: calc(10% + 13px);
     left: calc(50% + 12px);
     transform: translate(-50%, -50%);
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -33,28 +33,24 @@ div#winConfirmBeforeChange {
     width: 335px;
 }
 
-div#winConfirmBeforeChange.visible-window {
+div#winAlertBeforeChange.visible-window {
     display: block;
     opacity: 1;
     visibility: visible;
     transition: opacity 0.35s, visibility 0.35s ease;
 }
 
-div#winConfirmBeforeChange.import-students {
-    top: calc(10% + 13px);
-}
-
-div#winConfirmBeforeChange.hidden-window {
+div#winAlertBeforeChange.hidden-window {
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.6s, visibility 0.4s ease;
+    transition: opacity 0.25s, visibility 0.25s ease;
 }
 
-div#winConfirmBeforeChange.hidden-window-2 {
+div#winAlertBeforeChange.hidden-window-2 {
     display: none;
 }
 
-div#winConfirmBeforeChange div.header-area {
+div#winAlertBeforeChange div.header-area {
     height: 30px;
     display: flex;
     justify-content: space-between;
@@ -66,13 +62,13 @@ div#winConfirmBeforeChange div.header-area {
     cursor: move;
 }
 
-div#winConfirmBeforeChange div.header-area div.left-item {
+div#winAlertBeforeChange div.header-area div.left-item {
     font-size: 13px;
     height: 31px;
     line-height: 31px;
 }
 
-div#winConfirmBeforeChange div.header-area div.left-item img {
+div#winAlertBeforeChange div.header-area div.left-item img {
     display: inline-block;
     width: 24px;
     height: auto;
@@ -80,14 +76,14 @@ div#winConfirmBeforeChange div.header-area div.left-item img {
     margin-top: 3px;
 }
 
-div#winConfirmBeforeChange div.header-area div.left-item label {
+div#winAlertBeforeChange div.header-area div.left-item label {
     display: inline-block;
     margin-left: 3px;
     vertical-align: 6px;
     cursor: move;
 }
 
-div#winConfirmBeforeChange div.header-area div.right-item {
+div#winAlertBeforeChange div.header-area div.right-item {
     width:32px;
     height: 31px;
     line-height: 31px;
@@ -99,26 +95,26 @@ div#winConfirmBeforeChange div.header-area div.right-item {
     transition: color 0.25s, background-color 0.3s linear;
 }
 
-div#winConfirmBeforeChange div.header-area div.right-item:hover, 
-div#winConfirmBeforeChange div.header-area div.right-item:focus {
+div#winAlertBeforeChange div.header-area div.right-item:hover, 
+div#winAlertBeforeChange div.header-area div.right-item:focus {
     color: #ffffff;
     background-color: #6c757d;
 }
 
-div#winConfirmBeforeChange div.main-area div.content {
+div#winAlertBeforeChange div.main-area div.content {
     font-size: 13px;
     color: #212529;
-    padding: 12px 10px 12px 20px;
+    padding: 12px 10px 12px 16px;
     line-height: 1.8;
 }
 
-div#winConfirmBeforeChange div.main-area div.action {
+div#winAlertBeforeChange div.main-area div.action {
     text-align: center;
     padding: 12px 10px;
     border-top: 1px solid #e6e6e6;
 }
 
-div#winConfirmBeforeChange div.main-area div.action button {
+div#winAlertBeforeChange div.main-area div.action button {
     font-size: 14px;
     line-height: 1.5;
     text-align: center;
@@ -132,33 +128,17 @@ div#winConfirmBeforeChange div.main-area div.action button {
                 box-shadow 0.25s ease-in-out;
 }
 
-div#winConfirmBeforeChange div.main-area div.action button#btnConfirmOk {
+div#winAlertBeforeChange div.main-area div.action button#btnAlertOk {
     color: #ffffff;
     background-color: #007bff;
     border-color: #007bff;
-    margin-right: 30px;
 }
 
-div#winConfirmBeforeChange div.main-area div.action button#btnConfirmCancel {
-    color: #ffffff;
-    background-color: #6c757d;
-    border-color: #6c757d;
-}
-
-div#winConfirmBeforeChange div.main-area div.action button#btnConfirmOk:hover {
+div#winAlertBeforeChange div.main-area div.action button#btnAlertOk:hover {
     background-color: #0069d9;
     border-color: #0062cc;
 }
 
-div#winConfirmBeforeChange div.main-area div.action button#btnConfirmOk:focus {
+div#winAlertBeforeChange div.main-area div.action button#btnAlertOk:focus {
     box-shadow: 0 0 0 0.15rem rgba(0, 123, 255, 0.5);
-}
-
-div#winConfirmBeforeChange div.main-area div.action button#btnConfirmCancel:hover {
-    background-color: #5a6268;
-    border-color: #545b62;
-}
-
-div#winConfirmBeforeChange div.main-area div.action button#btnConfirmCancel:focus {
-    box-shadow: 0 0 0 0.15rem rgba(108, 117, 125, 0.5);
 }

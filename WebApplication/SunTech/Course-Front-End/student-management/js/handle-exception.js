@@ -83,15 +83,33 @@ function isLocalStorageSupportedByBrowser() {
 }
 
 function handleUndefinedException(isFunctionCallOnLoadPage = true) {
-    let messageForAlertNotification = `
-        Chức năng này không khả dụng do xảy ra lỗi chưa xác định.<br>
-        Bạn vui lòng liên hệ với Tác giả của chương trình để được trợ giúp.
-    `;
+    let currentBrowser = getCurrentBrowser().toLowerCase().trim();
+    let messageForAlertNotification;
+    let messageForStudentDataTable;
 
-    let messageForStudentDataTable = `
-        Lỗi chưa xác định !!!<br>
-        Bạn vui lòng liên hệ với Tác giả của chương trình để được trợ giúp.
-    `;
+    if (currentBrowser === 'edge') {
+        messageForAlertNotification = `
+            Chức năng này không khả dụng do Microsoft Edge không hỗ trợ lưu trữ dữ liệu khi chạy trực tiếp HTML File.<br>
+            Bạn vui lòng chạy File chương trình qua http/https server.<br>
+            Hoặc bạn có thể sử dụng Trình duyệt khác như: Chrome, Opera hoặc Firefox.
+        `;
+
+        messageForStudentDataTable = `
+            Microsoft Edge không hỗ trợ lưu trữ dữ liệu (Local Storage) khi chạy trực tiếp HTML File.<br>
+            Bạn vui lòng chạy File chương trình qua http/https server (localhost, GitHub, ...).<br>
+            Hoặc bạn có thể sử dụng Trình duyệt khác như: Chrome, Opera hoặc Firefox.
+        `;
+    } else {
+        messageForAlertNotification = `
+            Chức năng này không khả dụng do xảy ra lỗi chưa xác định.<br>
+            Bạn vui lòng liên hệ với Tác giả của chương trình để được trợ giúp.
+        `;
+
+        messageForStudentDataTable = `
+            Lỗi chưa xác định !!!<br>
+            Bạn vui lòng liên hệ với Tác giả của chương trình để được trợ giúp.
+        `;
+    }
 
     if (isFunctionCallOnLoadPage) {
         initializeSettingsWhenException(messageForAlertNotification);
