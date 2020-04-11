@@ -28,8 +28,8 @@ function isDataChangedBeforeUpdateOrDelete(actionType, studentObject) {
     return (
         isCurrentStudentIdNotExisted(studentObject) || 
         isLengthOfStudentInfoListChanged(actionType) || 
-        isDataOfStudentInfoListChanged(actionType) || 
-        isDataOfCurrentStudentChanged(actionType, studentObject)
+        isDataOfCurrentStudentChanged(actionType, studentObject) || 
+        isDataOfStudentInfoListChanged(actionType)
     );
 }
 
