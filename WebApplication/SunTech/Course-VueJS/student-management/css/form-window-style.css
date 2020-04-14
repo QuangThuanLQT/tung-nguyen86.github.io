@@ -1,0 +1,218 @@
+
+div#boxStudentFormContainer {
+    position: fixed;
+    z-index: 2000;
+    top: 0px;
+    left: 0px;
+
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+div#boxStudentFormContainer.visible-overlay {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.35s, visibility 0.35s ease;
+}
+
+div#boxStudentFormContainer.hidden-overlay {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s, visibility 0.5s ease;
+}
+
+div#winStudentForm {
+    position: relative;
+    top: calc(31% + 2px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    border-radius: 5px;
+    width: 440px;
+}
+
+div#winStudentForm.visible-window {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.35s, visibility 0.35s ease;
+}
+
+div#winStudentForm.hidden-window {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s, visibility 0.25s ease;
+}
+
+div#winStudentForm.hidden-window-2 {
+    display: none;
+}
+
+div#winStudentForm div.header-area {
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #000000;
+    background-color: #f2f2f2;
+    border-radius: 5px 5px 0px 0px;
+    border-bottom: 1px solid #e6e6e6;
+    cursor: move;
+}
+
+div#winStudentForm div.header-area div.left-item {
+    font-size: 13px;
+    height: 31px;
+    line-height: 31px;
+}
+
+div#winStudentForm div.header-area div.left-item img {
+    display: inline-block;
+    width: 24px;
+    height: auto;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+div#winStudentForm div.header-area div.left-item label {
+    display: inline-block;
+    margin-left: 3px;
+    vertical-align: 6px;
+    cursor: move;
+}
+
+div#winStudentForm div.header-area div.right-item {
+    width:32px;
+    height: 31px;
+    line-height: 31px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    border-top-right-radius: 5px;
+    background-color: transparent;
+    transition: color 0.25s, background-color 0.3s linear;
+}
+
+div#winStudentForm div.header-area div.right-item:hover, 
+div#winStudentForm div.header-area div.right-item:focus {
+    color: #ffffff;
+    background-color: #6c757d;
+}
+
+div#winStudentForm div.main-area {
+    width: 400px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    margin: 20px;
+    padding: 20px;
+}
+
+div#winStudentForm div.main-area label {
+    width: 130px;
+    float: left;
+    padding-top: 5px;
+}
+
+div#winStudentForm div.main-area label#lblGender {
+    margin-top: -6px;
+}
+
+div#winStudentForm div.main-area label:last-of-type {
+    clear: left;
+    padding-top: 25px;
+}
+
+div#winStudentForm div.main-area input[type="text"] {
+    width: 220px;
+    padding: 5px 8px;
+    margin-bottom: 15px;
+    border: 1px solid #aaaaaa;
+    border-radius: 5px;
+    transition: box-shadow 0.4s ease-in-out;
+}
+
+div#winStudentForm div.main-area input[type="text"]:focus {
+    box-shadow: 0 0 5px #aaaaaa;
+}
+
+div#winStudentForm div.main-area input[type="radio"] {
+    vertical-align: -1px;
+    margin-right: 3px;
+    cursor: pointer;
+}
+
+div#winStudentForm div.main-area input[type="radio"]:focus {
+    outline: 1px dotted #000000;
+}
+
+div#winStudentForm div.main-area input[type="radio"]:last-of-type {
+    margin-left: 20px;
+}
+
+div#winStudentForm div.main-area div#divErrorInfo {
+    display: none;
+
+    -webkit-animation: slide-down 0.3s ease-out;
+    -moz-animation: slide-down 0.3s ease-out;
+    -webkit-animation: slide-down 2s ease-in;
+    -moz-animation: slide-down 2s ease-in;
+}
+
+@-webkit-keyframes slide-down {
+    0%  { opacity: 0; }
+    20% { opacity: 1; }
+}
+
+div#winStudentForm div.main-area div#divErrorInfo ul {
+    list-style-type: none;
+}
+
+div#winStudentForm div.main-area div#divErrorInfo ul li {
+    color: #ff0000;
+    font-size: 13.5px;
+    margin-top: 10px;
+}
+
+div#winStudentForm div.main-area div#divErrorInfo ul li:first-child {
+    margin-top: 20px;
+}
+
+div#winStudentForm div.main-area div#divErrorInfo ul li i {
+    margin-right: 3px;
+    vertical-align: 1px;
+}
+
+div#winStudentForm div.main-area button#btnSaveStudentInfo {
+    background-color: #909090;
+    color: #ffffff;
+    font-size: 15px;
+    text-align: center;
+    padding: 6px 20px;
+    width: 113px;
+    cursor: pointer;
+    border: 1px solid #cccccc;
+    margin-top: 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+div#winStudentForm div.main-area button#btnSaveStudentInfo:hover, 
+div#winStudentForm div.main-area button#btnSaveStudentInfo:focus {
+    background-color: #666666;
+}
+
+div#winStudentForm div.main-area div#divResetStudentInfo {
+    display: inline-block;
+    margin-left: calc(100% - 275px);
+    font-size: 24px;
+    color: #909090;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+div#winStudentForm div.main-area div#divResetStudentInfo:hover, 
+div#winStudentForm div.main-area div#divResetStudentInfo:focus {
+    color: #666666;
+}
