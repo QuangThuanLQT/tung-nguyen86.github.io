@@ -42,7 +42,6 @@ function processOnLoadPage() {
     } catch(exception) {
         resetFilterSearchForm();
         divPaginationContainer.classList.add('hidden-pagination-box-container');
-        document.querySelector('div.advance-setting-container').setAttribute('style', 'margin-bottom: 15px;');
 
         if (typeof(exception.messageForAlertNotification) === 'undefined' || 
             typeof(exception.messageForStudentDataTable) === 'undefined') {
