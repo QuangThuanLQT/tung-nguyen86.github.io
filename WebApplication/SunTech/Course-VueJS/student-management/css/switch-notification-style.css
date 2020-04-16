@@ -5,7 +5,6 @@ div#boxNotification div.setting-notification label {
 
 div#boxNotification div.setting-notification label.switch-notification {
     float: right;
-    display: inline-block;
     width: 50px;
     height: 28px;
     position: relative;

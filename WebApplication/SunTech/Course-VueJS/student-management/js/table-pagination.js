@@ -222,17 +222,21 @@ function initializeRecordsPerPage() {
 }
 
 function getRecordsPerPage() {
-    let pageSize = localStorage.getItem('page_size');
+    try {
+        let pageSize = localStorage.getItem('page_size');
 
-    if (pageSize && pageSize.length > 0) {
-        if (!isValidPageSize(pageSize) || !isPageSizeInRange(pageSize)) {
+        if (pageSize && pageSize.length > 0) {
+            if (!isValidPageSize(pageSize) || !isPageSizeInRange(pageSize)) {
+                pageSize = DEFAULT_PAGE_SIZE;
+            }
+        } else {
             pageSize = DEFAULT_PAGE_SIZE;
         }
-    } else {
-        pageSize = DEFAULT_PAGE_SIZE;
-    }
 
-    return parseInt(pageSize);
+        return parseInt(pageSize);
+    } catch(exception) {
+        return MINUS_ONE_NUMBER.toString();
+    }
 }
 
 function setRecordsPerPage(recordsPerPage) {

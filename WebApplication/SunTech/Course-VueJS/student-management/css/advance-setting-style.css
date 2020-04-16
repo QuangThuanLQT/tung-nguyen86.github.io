@@ -116,14 +116,13 @@ div.hidden-setting-box-container-2 {
 }
 
 div.default-window-position {
-    top: 28px;
-    left: -341px;
+    top: 40px;
+    left: -282px;
     transition: top 0.4s, left 0.4s ease;
 }
 
 div.setting-box-container div.setting-box-header {
     float: left;
-    display: inline-block;
     cursor: move;
     width: calc(100% - 15px);
     height: 20px;
