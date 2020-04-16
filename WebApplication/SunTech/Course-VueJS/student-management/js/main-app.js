@@ -41,7 +41,7 @@ function processOnLoadPage() {
         loadPage();
     } catch(exception) {
         resetFilterSearchForm();
-        divPaginationContainer.className = 'hidden-pagination-box-container';
+        
 
         if (typeof(exception.messageForAlertNotification) === 'undefined' || 
             typeof(exception.messageForStudentDataTable) === 'undefined') {
@@ -50,6 +50,8 @@ function processOnLoadPage() {
             initializeSettingsWhenException(exception.messageForAlertNotification);
             renderTableForErrorInfo(exception.messageForStudentDataTable);
         }
+
+        divPaginationContainer.className = 'hidden-pagination-box-container';
     }
 }
 
