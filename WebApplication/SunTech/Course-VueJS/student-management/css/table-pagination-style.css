@@ -5,6 +5,7 @@ div#divPaginationDataTable div.pagination-box-container {
 }
 
 div#divPaginationDataTable div.hidden-pagination-box-container {
+    margin-bottom: 0px;
     display: none;
 }
 
