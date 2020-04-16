@@ -174,18 +174,16 @@ function processDisplayAfterImport(numberOfStudents) {
 function getProcessingTime(numberOfStudents) {
     if (numberOfStudents <= 0) {
         return null;
-    } else if (numberOfStudents > 0 && numberOfStudents <= 3) {
+    } else if (numberOfStudents > 0 && numberOfStudents <= 5) {
         return 2000;
-    } else if (numberOfStudents > 3 && numberOfStudents <= 5) {
-        return 2500;
     } else if (numberOfStudents > 5 && numberOfStudents <= 10) {
-        return 3000;
+        return 2500;
     } else if (numberOfStudents > 10 && numberOfStudents <= 20) {
-        return 3500;
+        return 3000;
     } else if (numberOfStudents > 20 && numberOfStudents <= 30) {
-        return 4000;
+        return 3500;
     } else {
-        return 4500;
+        return 4000;
     }
 }
 /* ------ End Functions Declaration ------*/
