@@ -4,11 +4,11 @@ const TABLE_COLUMN_COUNT    = 7;
 const TABLE_HEADER          = `
     <tr id="first-row">
         <td id="col-header-order">No</td>
-        <td>Họ và Tên</td>
+        <td id="col-header-full-name">Họ và Tên</td>
         <td id="col-header-email">Địa chỉ Email</td>
-        <td>Điện thoại</td>
+        <td id="col-header-phone-number">Điện thoại</td>
         <td id="col-header-hometown">Quê quán</td>
-        <td>Giới tính</td>
+        <td id="col-header-gender">Giới tính</td>
         <td id="col-header-action">Thao tác</td>
     </tr>
 `;

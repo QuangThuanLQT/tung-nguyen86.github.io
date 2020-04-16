@@ -23,16 +23,17 @@
     <link rel="stylesheet" type="text/css" href="./css/notification-style.css">
     <link rel="stylesheet" type="text/css" href="./css/auto-scroll-style.css">
     <link rel="stylesheet" type="text/css" href="./css/import-students-style.css">
+    <link rel="stylesheet" type="text/css" href="./css/table-pagination-style.css">
     <link rel="stylesheet" type="text/css" href="./css/responsive-style.css">
 </head>
 <body>
     <div class="container">
-        <button type="button" id="btnShowStudentForm" tabindex="1">
-            Thêm mới
-        </button>
         <div class="list-student">
             <h3>Danh sách sinh viên</h3>
             <div class="advance-setting-container">
+                <button type="button" id="btnShowStudentForm" tabindex="1" title="Click để thêm mới Sinh viên">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
                 <div id="divAdvanceSettingIcon">
                     <div class="menu-bar-item-1"></div>
                     <div class="menu-bar-item-2"></div>
@@ -128,11 +129,6 @@
                             </button>
                             <div class="import-setting-box hidden-import-setting-box-2">
                                 <ul>
-                                    <li id="litImportThreeNewStudents">
-                                        <a href="javascript:void(0);">
-                                            Danh sách 03 sinh viên mới
-                                        </a>
-                                    </li>
                                     <li id="litImportFiveNewStudents">
                                         <a href="javascript:void(0);">
                                             Danh sách 05 sinh viên mới
@@ -151,6 +147,11 @@
                                     <li id="litImportTwentyNewStudents">
                                         <a href="javascript:void(0);">
                                             Danh sách 20 sinh viên mới
+                                        </a>
+                                    </li>
+                                    <li id="litImportThirtyNewStudents">
+                                        <a href="javascript:void(0);">
+                                            Danh sách 30 sinh viên mới
                                         </a>
                                     </li>
                                 </ul>
@@ -193,7 +194,11 @@
                 </div>
             </div>
 
-            <table id="tblStudentInfoList"></table>
+            <div id="divPaginationDataTable">
+                <div class="pagination-box-container"></div>
+                <table id="tblStudentInfoList"></table>
+            </div>
+
             <button type="button" id="btnScrollTop" title="Click để trở về đầu trang">
                 <i class="fa fa-angle-up" aria-hidden="true"></i>
             </button>
@@ -260,6 +265,7 @@
     <script src="./js/filter-search.js"></script>
     <script src="./js/download-file.js"></script>
     <script src="./js/import-students.js"></script>
+    <script src="./js/table-pagination.js"></script>
     <script src="./js/handle-exception.js"></script>
 </body>
 </html>

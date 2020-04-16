@@ -189,7 +189,6 @@ function synchronizeData(isLengthOfListChanged, isStudentIdNotExisted = false, s
         }, 4000);
     } else {
         setTimeout(function() { displayStudentInfoListAfterSynchronize(parseInt(studentObject.id)); }, 3200);
-        setTimeout(function() { scrollBackToFocusedTableRow(); }, 3600);
 
         setTimeout(function() {
             sendAlertNotification(
@@ -221,11 +220,12 @@ function displayStudentInfoListAfterSynchronize(synchronizedStudentId) {
 
         if (currentTableRowIndex >= 0) {
             setBgColorOfCurrentTableRow(currentTableRowIndex, ACTION_UPDATE_STUDENT);
-            currentLocationFromTop = getLocationFromTopOfTableRow(currentTableRowIndex);
         }
     } else {
         tblStudentInfoList.innerHTML = renderStudentDataTable([]);
     }
+
+    displayTablePagination();
 }
 
 function getLengthOfListInLocalStorage() {

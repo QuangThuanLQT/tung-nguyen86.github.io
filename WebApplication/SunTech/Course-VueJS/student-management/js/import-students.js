@@ -20,25 +20,37 @@ var sampleDataOfStudents = [
     {"id":"17","fullName":"Phạm Khánh An","emailAddress":"khanhan_tb@gmail.com","phoneNumber":"0983.199.004","homeTown":"Thái Bình","gender":"Nữ"}, 
     {"id":"18","fullName":"Bùi Nam Phương","emailAddress":"namphuong96@gmail.com","phoneNumber":"0842.547.629","homeTown":"Vĩnh Phúc","gender":"Nữ"}, 
     {"id":"19","fullName":"Đặng Nhật Minh","emailAddress":"minhmuoi68@yahoo.com","phoneNumber":"0904.173.922","homeTown":"Điện Biên","gender":"Nam"}, 
-    {"id":"20","fullName":"Nguyễn Hoàng Minh","emailAddress":"minhmupmip@gmail.com","phoneNumber":"0914.356.244","homeTown":"Lào Cai","gender":"Nam"}
+    {"id":"20","fullName":"Nguyễn Hoàng Minh","emailAddress":"minhmupmip@gmail.com","phoneNumber":"0914.356.244","homeTown":"Lào Cai","gender":"Nam"}, 
+    {"id":"21","fullName":"Phạm Hồng Linh","emailAddress":"linhhong1995@yahoo.com","phoneNumber":"0988.102.666","homeTown":"Hà Nội","gender":"Nữ"}, 
+    {"id":"22","fullName":"Trần Ngọc Minh","emailAddress":"doitruong85@hotmail.com","phoneNumber":"0912.203.329","homeTown":"Nam Định","gender":"Nam"}, 
+    {"id":"23","fullName":"Trần Minh Thu","emailAddress":"thutm_hd@gmail.com","phoneNumber":"0913.993.311","homeTown":"Hải Dương","gender":"Nữ"}, 
+    {"id":"24","fullName":"Nguyễn Trung Dũng","emailAddress":"mc_lover103@gmail.com","phoneNumber":"0904.177.402","homeTown":"Thái Bình","gender":"Nam"}, 
+    {"id":"25","fullName":"Lê Minh Trang","emailAddress":"tranglm.hp@gmail.com","phoneNumber":"0904.637.222","homeTown":"Hải Phòng","gender":"Nữ"}, 
+    {"id":"26","fullName":"Trần Bình Minh","emailAddress":"binhminhtran@yahoo.com.vn","phoneNumber":"0842.448.217","homeTown":"Bắc Giang","gender":"Nam"}, 
+    {"id":"27","fullName":"Vũ Hoàng Linh","emailAddress":"hoanglinh.96@gmail.com","phoneNumber":"0983.125.257","homeTown":"Ninh Bình","gender":"Nam"}, 
+    {"id":"28","fullName":"Trương Minh Anh","emailAddress":"cogaidolong@hotmail.com","phoneNumber":"0987.385.432","homeTown":"Hà Nội","gender":"Nữ"}, 
+    {"id":"29","fullName":"Hoàng Ngọc Thuận","emailAddress":"thuanhn.90@gmail.com","phoneNumber":"0914.833.162","homeTown":"Hà Nam","gender":"Nam"}, 
+    {"id":"30","fullName":"Phạm Thu Minh","emailAddress":"minhpham.hanu@gmail.com","phoneNumber":"0906.235.610","homeTown":"Thanh Hóa","gender":"Nữ"}
 ];
 
 var btnImportSampleData             = document.getElementById('btnImportSampleData');
 var divImportSettingBox             = document.querySelector('div.import-setting-box-container div.import-setting-box');
-var litImportThreeNewStudents       = document.getElementById('litImportThreeNewStudents');
+
 var litImportFiveNewStudents        = document.getElementById('litImportFiveNewStudents');
 var litImportTenNewStudents         = document.getElementById('litImportTenNewStudents');
 var litImportFifteenNewStudents     = document.getElementById('litImportFifteenNewStudents');
 var litImportTwentyNewStudents      = document.getElementById('litImportTwentyNewStudents');
+var litImportThirtyNewStudents      = document.getElementById('litImportThirtyNewStudents');
 /* ------ End Global Variables Declaration ------*/
 
 /* ------ Start Functions Declaration ------*/
 btnImportSampleData.onclick         = function() { processImportSettingBox(); }
-litImportThreeNewStudents.onclick   = function() { processOnImportSampleData(event, 3); }
+
 litImportFiveNewStudents.onclick    = function() { processOnImportSampleData(event, 5); }
 litImportTenNewStudents.onclick     = function() { processOnImportSampleData(event, 10); }
 litImportFifteenNewStudents.onclick = function() { processOnImportSampleData(event, 15); }
 litImportTwentyNewStudents.onclick  = function() { processOnImportSampleData(event, 20); }
+litImportThirtyNewStudents.onclick  = function() { processOnImportSampleData(event, 30); }
 
 function processImportSettingBox() {
     if (divImportSettingBox.className.toLowerCase().indexOf('hidden') !== -1) {
@@ -160,18 +172,20 @@ function processDisplayAfterImport(numberOfStudents) {
 }
 
 function getProcessingTime(numberOfStudents) {
-    if (numberOfStudents > 0 && numberOfStudents <= 3) {
-        return 2500;
+    if (numberOfStudents <= 0) {
+        return null;
+    } else if (numberOfStudents > 0 && numberOfStudents <= 3) {
+        return 2000;
     } else if (numberOfStudents > 3 && numberOfStudents <= 5) {
-        return 3000;
+        return 2500;
     } else if (numberOfStudents > 5 && numberOfStudents <= 10) {
+        return 3000;
+    } else if (numberOfStudents > 10 && numberOfStudents <= 20) {
         return 3500;
-    } else if (numberOfStudents > 10 && numberOfStudents <= 15) {
+    } else if (numberOfStudents > 20 && numberOfStudents <= 30) {
         return 4000;
-    } else if (numberOfStudents > 15 && numberOfStudents <= 20) {
-        return 4000;
+    } else {
+        return 4500;
     }
-
-    return null;
 }
 /* ------ End Functions Declaration ------*/

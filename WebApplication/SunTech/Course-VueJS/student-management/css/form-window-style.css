@@ -24,8 +24,8 @@ div#boxStudentFormContainer.hidden-overlay {
 
 div#winStudentForm {
     position: relative;
-    top: calc(31% + 2px);
-    left: 50%;
+    top: calc(36% - 2px);
+    left: calc(50% - 2px);
     transform: translate(-50%, -50%);
     border: 1px solid rgba(0, 0, 0, 0.2);
     background-color: #ffffff;
@@ -153,16 +153,19 @@ div#winStudentForm div.main-area input[type="radio"]:last-of-type {
 
 div#winStudentForm div.main-area div#divErrorInfo {
     display: none;
-
-    -webkit-animation: slide-down 0.3s ease-out;
-    -moz-animation: slide-down 0.3s ease-out;
-    -webkit-animation: slide-down 2s ease-in;
-    -moz-animation: slide-down 2s ease-in;
+    -webkit-animation: slide-down 0.1s linear;
+    -moz-animation: slide-down 0.1s linear;
+    animation: slide-down 0.1s linear;
 }
 
 @-webkit-keyframes slide-down {
     0%  { opacity: 0; }
-    20% { opacity: 1; }
+    10% { opacity: 1; }
+}
+
+@keyframes slide-down {
+    0%  { opacity: 0; }
+    10% { opacity: 1; }
 }
 
 div#winStudentForm div.main-area div#divErrorInfo ul {

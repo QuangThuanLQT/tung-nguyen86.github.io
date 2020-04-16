@@ -18,6 +18,7 @@ function filterSearch() {
 
     foundStudents = getArrayOfSearchedStudents();
     displayStudentInfoListAfterSearching();
+    displayTablePagination();
 
     divSettingBoxContainer.focus();
 }

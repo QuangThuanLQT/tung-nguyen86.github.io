@@ -10,6 +10,7 @@ const MINUS_ONE_NUMBER      = -1;
 
 /* ------ Start Global Variables Declaration ------*/
 var btnShowStudentForm      = document.getElementById('btnShowStudentForm');
+var divPaginationContainer  = document.querySelector('div#divPaginationDataTable div.pagination-box-container');
 var tblStudentInfoList      = document.getElementById('tblStudentInfoList');
 
 var txtFullName;
@@ -85,6 +86,7 @@ function loadPageNormally() {
     resetFilterSearchForm();
     initializeAllNotificationSettings();
     initializeGlobalStudentId();
+    initializeRecordsPerPage();
     displayStudentInfoList(true);
 }
 
@@ -215,7 +217,7 @@ function addStudent(student) {
             currentActiveElement = document.activeElement;
 
             confirmBeforeChange(
-                'Hộp thoại xác nhận Thêm', 
+                'Hộp thoại xác nhận Thêm mới', 
                 `Bạn chắc chắn muốn thêm sinh viên<br>${student.fullName} vào Danh sách ?`, 
                 currentActiveElement, 
                 function(isConfirmationOk) {
@@ -226,15 +228,16 @@ function addStudent(student) {
 
                         students.unshift(student);
                         localStorage.setItem('students', JSON.stringify(students));
-
                         setGlobalStudentId((parseInt(student.id) + 1).toString());
+
+                        scrollTopOfPage();
                         displayStudentInfoListAfterSaving(student.id, ACTION_ADD_STUDENT);
 
                         let addingTableRow = document.querySelector('div.list-student table tr:not(#first-row)');
                         setTimeout(function() { addingTableRow.classList.add('added-row'); }, 10);
 
                         if (chkNotificationAdd.checked === true) {
-                            setTimeout(function() { sendNotification(ACTION_ADD_STUDENT, student.fullName); }, 700);
+                            setTimeout(function() { sendNotification(ACTION_ADD_STUDENT, student.fullName); }, 1000);
                         }
                     }
                 }
@@ -253,7 +256,7 @@ function updateStudent(student) {
             currentActiveElement = document.activeElement;
 
             confirmBeforeChange(
-                'Hộp thoại xác nhận Sửa', 
+                'Hộp thoại xác nhận Cập nhật', 
                 `Bạn chắc chắn muốn cập nhật Thông tin sinh viên<br>${student.fullName} trong Danh sách ?`, 
                 currentActiveElement, 
                 function(isConfirmationOk) {
@@ -270,10 +273,7 @@ function updateStudent(student) {
 
                         if (currentTableRowIndex >= 0) {
                             setBgColorOfCurrentTableRow(currentTableRowIndex, ACTION_UPDATE_STUDENT);
-                            currentLocationFromTop = getLocationFromTopOfTableRow(currentTableRowIndex);
                         }
-
-                        setTimeout(function() { scrollBackToFocusedTableRow(); }, 400);
 
                         if (chkNotificationUpdate.checked === true) {
                             setTimeout(function() { sendNotification(ACTION_UPDATE_STUDENT, student.fullName); }, 1000);
@@ -355,6 +355,8 @@ function displayStudentInfoList(isFirstFunctionCallOnLoadPage = false) {
     } else {
         tblStudentInfoList.innerHTML = renderStudentDataTable([]);
     }
+
+    displayTablePagination();
 }
 
 function displayStudentInfoListAfterSearching() {
@@ -385,6 +387,8 @@ function displayStudentInfoListAfterSaving(savedStudentId, actionType) {
             currentTableRowIndex = findIndexOfItemByIdInArray(students, savedStudentId);
         }
     }
+
+    displayTablePagination(actionType);
 }
 
 function renderStudentDataTable(arrayOfStudents, actionType = EMPTY_STRING) {
@@ -405,7 +409,6 @@ function renderStudentDataTable(arrayOfStudents, actionType = EMPTY_STRING) {
 
             functionCallFromTableColumn = `
                 setBgColorOfFocusedTableRow(this, 'table-column');
-                currentLocationFromTop = (document.documentElement.scrollTop || document.body.scrollTop);
                 tableRowIndexBeforeUpdate = ${index};
             `;
 
@@ -483,6 +486,10 @@ function renderStudentDataTable(arrayOfStudents, actionType = EMPTY_STRING) {
     return tableContent;
 }
 
+function displayTablePagination(actionType = EMPTY_STRING) {
+    divPaginationContainer.appendChild(createPaginationBox(DEFAULT_PAGINATION_CONFIG, actionType));
+}
+
 function processOnKeyDownTableRow(event, sourceElementObject, tableRowIndex, tableRowTotal, presentStudentId) {
     // Handle when end-user press Up Arrow key on the keyboard.
     if (event.keyCode === 38) {
@@ -506,7 +513,6 @@ function processForUpArrowKey(sourceElementObject, tableRowIndex) {
         sourceElementObject = sourceElementObject.previousElementSibling;
         sourceElementObject.focus();
         setBgColorOfFocusedTableRow(sourceElementObject, 'table-row');
-        currentLocationFromTop = (document.documentElement.scrollTop || document.body.scrollTop);
     }
 }
 
@@ -516,7 +522,6 @@ function processForDownArrowKey(sourceElementObject, tableRowIndex, tableRowTota
         sourceElementObject = sourceElementObject.nextElementSibling;
         sourceElementObject.focus();
         setBgColorOfFocusedTableRow(sourceElementObject, 'table-row');
-        currentLocationFromTop = (document.documentElement.scrollTop || document.body.scrollTop);
     }
 }
 
@@ -588,8 +593,6 @@ function resetStudentForm(isStudentFormFocused = true) {
     if (isStudentFormFocused) {
         txtFullName.focus();
     }
-
-    resetBgColorOfAllTableRows();
 }
 
 function resetEffectForStudentForm() {

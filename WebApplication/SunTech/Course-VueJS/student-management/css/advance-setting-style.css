@@ -6,6 +6,31 @@ div.list-student h3 {
 div.advance-setting-container {
     float: right;
     position: relative;
+    margin-bottom: 20px;
+}
+
+button#btnShowStudentForm {
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 18px;
+    text-align: center;
+    padding: 2px 7px;
+    cursor: pointer;
+    border: 1px solid #909090;
+    vertical-align: 5px;
+    margin-right: 25px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease-in-out;    
+    display: inline-block;
+}
+
+button#btnShowStudentForm i {
+    vertical-align: -1px;
+}
+
+button#btnShowStudentForm:hover {
+    background-color: #909090;
+    color: #ffffff;
 }
 
 div#divAdvanceSettingIcon {
@@ -67,7 +92,7 @@ div.setting-box-container {
 
     position: absolute;
     right: -2px;
-    top: 28px;
+    top: 40px;
     z-index: 9;
 }
 

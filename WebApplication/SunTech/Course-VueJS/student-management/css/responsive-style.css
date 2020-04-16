@@ -4,12 +4,8 @@
         width: 96%;
     }
 
-    div.form-student {
-        margin-left: 0px;
-    }
-
     div.list-student {
-        width: calc(100% - 430px);
+        width: 100%;
     }
 
     div.list-student table {
@@ -27,16 +23,6 @@
 }
 
 @media only screen and (max-width: 1150px) {
-    div.form-student {
-        float: none;
-        width: 450px;
-        margin: 20px auto;
-    }
-
-    div.form-student input[type="text"] {
-        width: 270px;
-    }
-
     div.list-student {
         float: none;
         width: 96%;
@@ -80,6 +66,10 @@
         bottom: 22px;
     }
 
+    div#winStudentForm {
+        top: calc(25% - 6px);
+    }
+
     div#winAlertBeforeChange {
         top: calc(32% + 9px);
     }
@@ -98,15 +88,19 @@
 }
 
 @media only screen and (max-width: 768px) {
-    div.form-student {
+    div#winStudentForm {
+        top: calc(33% - 2px);
+    }
+
+    div#winStudentForm div.main-area {
         width: 400px;
     }
 
-    div.form-student input[type="text"] {
+    div#winStudentForm div.main-area input[type="text"] {
         width: 220px;
     }
 
-    div.form-student div#divResetStudentInfo {
+    div#winStudentForm div.main-area div#divResetStudentInfo {
         margin-left: calc(100% - 275px);
     }
 
@@ -114,6 +108,18 @@
         width: 100%;
         padding: 20px 10px;
     }
+
+    div.list-student table tr td#col-header-order { width: 40px; }
+
+    div.list-student table tr td#col-header-full-name { width: 130px; }
+
+    div.list-student table tr td#col-header-email { width: 130px; }
+
+    div.list-student table tr td#col-header-hometown { width: 80px; }
+
+    div.list-student table tr td#col-header-gender { width: 70px; }
+
+    div.list-student table tr td#col-header-action { width: 120px; }
 
     div.list-student button#btnScrollTop {
         padding: 3px 4px;
@@ -152,6 +158,12 @@
         float: none;
     }
 
+    button#btnShowStudentForm {
+        position: absolute;
+        right: 35px;
+        top: -3px;
+    }
+
     div#divAdvanceSettingIcon {
         float: right;
         margin-right: 5px;
@@ -161,7 +173,7 @@
         width: 100%;
         position: static;
         overflow: hidden;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
 
     div.hidden-setting-box-container-2 {
@@ -359,18 +371,36 @@
         font-size: 14px;
         margin-bottom: 20px;
     }
+
+    div#divPaginationDataTable div.pagination-box-container div.pagination-box {
+        flex-direction: column-reverse;
+        align-items: center;
+        align-content: space-between;
+        margin-top: -10px;
+    }
+
+    div.pagination-box div.setting-page-size-container {
+        margin-bottom: 20px;
+    }
 }
 
 @media only screen and (max-width: 480px) {
-    div.form-student {
-        width: 96%;
+    div#winStudentForm {
+        top: calc(50% - 2px);
+        left: 50%;
+        width: 92%;
     }
 
-    div.form-student input[type="text"] {
+    div#winStudentForm div.main-area {
+        margin: 20px auto;
+        width: 90%;
+    }
+
+    div#winStudentForm div.main-area input[type="text"] {
         width: calc(100% - 140px);
     }
 
-    div.form-student div#divResetStudentInfo {
+    div#winStudentForm div.main-area div#divResetStudentInfo {
         margin-left: calc(100% - 277px);
     }
 
@@ -437,19 +467,20 @@
 }
 
 @media only screen and (max-width: 420px) {
-    div.form-student {
-        width: 98%;
+    div#winStudentForm {
+        top: calc(54% - 8px);
+        width: 94%;
     }
 
-    div.form-student label {
+    div#winStudentForm div.main-area label {
         width: 110px;
     }
 
-    div.form-student input[type="text"] {
+    div#winStudentForm div.main-area input[type="text"] {
         width: calc(100% - 110px);
     }
 
-    div.form-student div#divResetStudentInfo {
+    div#winStudentForm div.main-area div#divResetStudentInfo {
         margin-left: calc(100% - 248px);
     }
 
@@ -534,24 +565,28 @@
         font-size: 16.38px;
     }
 
-    div.form-student label {
+    div#winStudentForm {
+        top: calc(50% - 2px);
+    }
+
+    div#winStudentForm div.main-area label {
         width: 100px;
     }
 
-    div.form-student input[type="text"] {
+    div#winStudentForm div.main-area input[type="text"] {
         width: calc(100% - 100px);
     }
 
-    div.form-student div#divErrorInfo ul li {
+    div#winStudentForm div.main-area div#divErrorInfo ul li {
         font-size: 12.5px;
     }
 
-    div.form-student button#btnSaveStudentInfo {
+    div#winStudentForm div.main-area button#btnSaveStudentInfo {
         font-size: 14px;
         width: 108px;
     }
 
-    div.form-student div#divResetStudentInfo {
+    div#winStudentForm div.main-area div#divResetStudentInfo {
         margin-left: calc(100% - 231px);
         font-size: 22px;
     }
@@ -740,6 +775,42 @@
     div#winProcessBeforeChange {
         top: calc(50% + 5px);
     }
+
+    div.pagination-box-container div.pagination-box ul li.pagination-item a.pagination-link {
+        padding: 0.45rem 0.7rem;
+        line-height: 1.2;
+        font-size: 12px;
+    }
+
+    div.pagination-box-container div.pagination-box ul li.pagination-item:first-child a.pagination-link {
+        font-size: 13px;
+        line-height: 1.1;
+    }
+
+    div.pagination-box-container div.pagination-box ul li.pagination-item:last-child a.pagination-link {
+        font-size: 13px;
+        line-height: 1.1;
+        margin-right: 0px;
+    }
+
+    div.pagination-box div.setting-page-size-container div.setting-page-size {
+        height: 30px;
+        line-height: 1.3;
+    }
+
+    div.pagination-box div.setting-page-size-container div.setting-page-size select {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    div.pagination-box div.setting-page-size-container div.setting-page-size div.down-arrow {
+        padding: 6px 9px;
+    }
+
+    div.pagination-box div.setting-page-size-container span.total-record-info {
+        margin-left: 15px;
+        font-size: 12px;
+    }
 }
 
 @media only screen and (max-width: 320px) {
@@ -751,24 +822,28 @@
         font-size: 14.5px;
     }
 
-    div.form-student label {
+    div#winStudentForm {
+        top: calc(52% - 2px);
+    }
+
+    div#winStudentForm div.main-area label {
         width: 90px;
     }
 
-    div.form-student input[type="text"] {
+    div#winStudentForm div.main-area input[type="text"] {
         width: calc(100% - 90px);
     }
 
-    div.form-student div#divErrorInfo ul li {
+    div#winStudentForm div.main-area div#divErrorInfo ul li {
         font-size: 12px;
     }
 
-    div.form-student button#btnSaveStudentInfo {
+    div#winStudentForm div.main-area button#btnSaveStudentInfo {
         font-size: 13px;
         width: 104px;
     }
 
-    div.form-student div#divResetStudentInfo {
+    div#winStudentForm div.main-area div#divResetStudentInfo {
         margin-left: calc(100% - 217px);
     }
 
@@ -943,5 +1018,22 @@
 
     div#winProcessBeforeChange {
         top: calc(57% + 12px);
+    }
+
+    div.pagination-box div.setting-page-size-container div.setting-page-size {
+        width: 143px;
+    }
+    
+    div.pagination-box div.setting-page-size-container div.setting-page-size select {
+        padding: 6px;
+    }
+
+    div.pagination-box div.setting-page-size-container div.setting-page-size div.down-arrow {
+        padding: 6px;
+    }
+
+    div.pagination-box div.setting-page-size-container span.total-record-info {
+        margin-left: 10px;
+        font-size: 11px;
     }
 }

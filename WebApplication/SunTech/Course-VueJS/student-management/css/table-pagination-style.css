@@ -1,0 +1,165 @@
+
+div#divPaginationDataTable div.pagination-box-container {
+    clear: both;
+    margin-bottom: 20px;
+}
+
+div#divPaginationDataTable div.hidden-pagination-box-container {
+    display: none;
+}
+
+div#divPaginationDataTable div.pagination-box-container div.pagination-box {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+div#divPaginationDataTable div.hidden-pagination-box-container div.hidden-pagination-box {
+    display: none;
+}
+
+div.pagination-box-container div.pagination-box ul li.pagination-item {
+    list-style-type: none;
+    display: inline-block;
+}
+
+div.pagination-box-container div.pagination-box ul li.pagination-item.disabled {
+    cursor: not-allowed;
+}
+
+div.pagination-box-container div.pagination-box ul li.pagination-item a.pagination-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #353535;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+}
+
+div.pagination-box-container div.pagination-box ul li.pagination-item a.pagination-link:hover {
+    z-index: 2;
+    color: #0056b3;
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+div.pagination-box-container div.pagination-box ul li.pagination-item a.pagination-link:focus {
+    z-index: 3;
+    outline: 0;
+    box-shadow: 0 0 0 0.05rem rgba(0, 123, 255, 0.25);
+}
+
+div.pagination-box-container div.pagination-box ul li.pagination-item:first-child a.pagination-link {
+    margin-left: 0;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+div.pagination-box-container div.pagination-box ul li.pagination-item:last-child a.pagination-link {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    margin-right: 1px;
+}
+
+div.pagination-box-container div.pagination-box ul li.pagination-item.active a.pagination-link {
+    z-index: 3;
+    color: #ffffff;
+    background-color: #909090;
+    border-color: #909090;
+}
+
+div.pagination-box-container div.pagination-box ul li.pagination-item.disabled a.pagination-link {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #ffffff;
+    border-color: #dee2e6;
+}
+
+div.pagination-box div.setting-page-size-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Customize Style of HTML Select Tag */
+div.pagination-box div.setting-page-size-container div.setting-page-size {
+    position: relative;
+    display: flex;
+    width: 170px;
+    height: 34px;
+    line-height: 1.2;
+    background-color: #ffffff;
+    border-radius: 0.25rem;
+}
+
+@supports (-moz-appearance: none) {
+    div.pagination-box div.setting-page-size-container div.setting-page-size {
+        height: 33px;
+    }
+}
+
+@supports (-ms-ime-align: auto) {
+    div.pagination-box div.setting-page-size-container div.setting-page-size {
+        height: 33px;
+    }
+}
+
+div.pagination-box div.setting-page-size-container div.setting-page-size select {
+    flex: 1;
+    border: 1px solid #dee2e6;
+    padding: 7px 10px;
+    color: #000000;
+    background-color: transparent;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.35s ease-in-out;
+}
+
+div.pagination-box div.setting-page-size-container div.setting-page-size:hover select {
+    border-color: #aaaaaa;
+}
+
+div.pagination-box div.setting-page-size-container div.setting-page-size select:focus {
+    box-shadow: 1px 0 6px #aaaaaa;
+    border-color: #80bdff;
+}
+
+div.pagination-box div.setting-page-size-container div.setting-page-size select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000000;
+}
+
+/* Customize Down Arrow */
+div.pagination-box div.setting-page-size-container div.setting-page-size div.down-arrow {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+
+    color: #909090;
+    padding: 8px 9px;
+    background-color: #ffffff;
+    border-left: 1px solid #dee2e6;
+    border-radius: 0 0.25rem 0.25rem 0;
+    cursor: pointer;
+    pointer-events: none;
+    transition: all 0.35s ease-in-out;
+}
+
+div.pagination-box div.setting-page-size-container div.setting-page-size:hover div.down-arrow {
+    border-color: #aaaaaa;
+}
+
+div.pagination-box div.setting-page-size-container div.setting-page-size select:focus + div.down-arrow {
+    border-color: #80bdff;
+    color: #000000;
+}
+
+div.pagination-box div.setting-page-size-container span.total-record-info {
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 13px;
+    color: #000000;
+}
