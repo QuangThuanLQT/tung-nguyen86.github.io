@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastery Products App</title>
+    <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="nav-bar"></div>
+
+    <div id="app" class="main-container">
+        <div class="cart-info-container">
+            <div class="cart-info">
+                <div class="cart" v-on:click.self="processDisplayForCartDetail">
+                    Cart({{ cart.length }})
+                </div>
+
+                <cart-detail 
+                    :cart="cart" 
+                    :products="products" 
+                    :selected_product_index="selectedProductIndex" 
+                    :selected_variant_index="selectedVariantIndex" 
+                    :style="{ display: cssValueOfDisplay }">
+                </cart-detail>
+            </div>
+        </div>
+
+        <product 
+            v-for="(product, index) in products" 
+            :key="product.productId" 
+            :premium="premium" 
+            :cart="cart" 
+            :product="product" 
+            :product_index="index" 
+            :selected_product_index="selectedProductIndex" 
+            @add-to-cart="addToCart" 
+            @subtract-to-cart="subtractToCart" 
+            @select-variant-product="selectProduct">
+        </product>
+    </div>
+
+    <script src="../../common-libs/js/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
